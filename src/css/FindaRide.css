@@ -105,7 +105,7 @@ hr {
 @media (max-width: 1191px) {
   .form {
     flex-direction: column;
-    width: 100%;
+    width: 360px;
   }
 
   .form input {
@@ -113,11 +113,14 @@ hr {
     height: 54px;
   }
   .form hr {
-    width: 241.4px;
+    width: 100%;
     height: 1px;
   }
   .find-a-ride-submit {
     width: 100%;
     height: 54px;
+  }
+  .find-a-ride-input {
+    width: 100%;
   }
 }
