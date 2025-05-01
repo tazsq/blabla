@@ -115,6 +115,14 @@ hr {
   .form hr {
     width: 100%;
     height: 1px;
+    /* ksjdfjv */
+    color: rgba(237, 237, 237, 1);
+    border: 0 solid rgba(211, 211, 211, 0);
+    border-left: 1px solid;
+    width: 1px;
+    height: 32px;
+    flex: none;
+    margin: auto 0;
   }
   .find-a-ride-submit {
     width: 100%;
