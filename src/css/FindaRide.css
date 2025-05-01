@@ -118,6 +118,7 @@ hr {
     background-color: rgba(237, 237, 237, 1); /* Set background color */
     border: none; /* Remove border styles */
     margin: auto 0; /* Center the line vertically */
+    border: 0 solid rgba(211, 211, 211, 0);
   }
   .find-a-ride-submit {
     width: 100%;
