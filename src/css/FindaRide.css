@@ -42,7 +42,7 @@ hr {
   /* align-content: center; */
   justify-content: center;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 16px;
 }
 
 .find-a-ride-input {
@@ -98,33 +98,46 @@ hr {
 }
 .form {
   box-shadow: 4px 5px 18px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 16px;
   margin: 30px;
 }
 
 @media (max-width: 1191px) {
   .form {
     flex-direction: column;
-    width: 360px;
+    width: 90vw;
+    /* padding: 10px; */
   }
 
   .form input {
     width: 100%;
-    height: 54px;
+    height: 50px;
   }
+
   .form hr {
-    width: 100%; /* Full width for horizontal line */
-    height: 1px; /* Thin horizontal line */
-    background-color: rgba(237, 237, 237, 1); /* Set background color */
-    border: none; /* Remove border styles */
-    margin: auto 0; /* Center the line vertically */
-    border: 0 solid rgba(211, 211, 211, 0);
+    width: 80vw;
+    height: 1px;
+    background-color: rgba(237, 237, 237, 1);
+    border: none;
+    margin: 0 auto;
   }
-  .find-a-ride-submit {
-    width: 100%;
-    height: 54px;
-  }
+
   .find-a-ride-input {
     width: 100%;
+    padding: 10px 20px;
+  }
+
+  /* ✅ Critical styles */
+  .submit-container {
+    width: 100%;
+    display: flex;
+  }
+
+  .find-a-ride-submit {
+    flex: 1;
+    width: 100% !important; /* Force full width */
+    height: 56px;
+    font-size: 1.2rem;
+    border-radius: 0 0 10px 10px;
   }
 }

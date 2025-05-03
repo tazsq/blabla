@@ -7,9 +7,28 @@ import plus from "../assets/plus.png";
 import profile from "../assets/profile.png";
 import downArrow from "../assets/down-arrow.png";
 import upArrow from "../assets/up-arrow.png";
+import Sidebar from "./Sidebar";
+import useEffect from "react";
 
 function Navbar() {
   const [dropped, setDropped] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  function handleResize() {
+    setIsMobile(window.innerWidth < 1191);
+  }
+  // useEffect(() => {
+  //   first;
+
+  //   return () => {
+  //     second;
+  //   };
+  // }, []);
+  function toggleSidebar() {
+    setSidebarOpen(!sidebarOpen);
+  }
+  window.addEventListener("resize", handleResize);
 
   function handleDropdownClick() {
     setDropped(!dropped);
@@ -19,25 +38,33 @@ function Navbar() {
   }
   return (
     <div className="navbar-css pos-relative">
+      {isMobile && (
+        <button className="sidebar-btn" onClick={toggleSidebar}>
+          &#9776; {/* Unicode for hamburger icon */}
+        </button>
+      )}
+      <Sidebar isOpen={sidebarOpen} />
       <div className="logo-flex">
         <img src={logo} alt="logo" className="logo" />
         <h1>SathChalo</h1>
       </div>
-      <div className="nav-search">
-        <a href="/" title="Search" className="search-flex">
-          <div className="nav-logo">
-            <img src={searchLogo} alt="search" />
-          </div>
-          <div className="search">Search</div>
-        </a>
-      </div>
-      <div className="nav-search">
-        <a href="/publish-ride" title="Search" className="search-flex">
-          <div className="nav-logo">
-            <img src={plus} alt="" />
-          </div>
-          <div className="search">Publish a ride</div>
-        </a>
+      <div className="nav-right">
+        <div className="nav-search">
+          <a href="/" title="Search" className="search-flex">
+            <div className="nav-logo">
+              <img src={searchLogo} alt="search" />
+            </div>
+            <div className="search">Search</div>
+          </a>
+        </div>
+        <div className="nav-search">
+          <a href="/publish-ride" title="Search" className="search-flex">
+            <div className="nav-logo">
+              <img src={plus} alt="" />
+            </div>
+            <div className="search">Publish a ride</div>
+          </a>
+        </div>
       </div>
       <div className="nav-search">
         <div className="profile-wrapper" onClick={handleDropdownClick}>

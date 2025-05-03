@@ -104,3 +104,56 @@
 .profile-wrapper:hover {
   background-color: #dad7cd;
 }
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  gap: 1.2vw;
+}
+@media (max-width: 1191px) {
+  .navbar-css {
+    position: relative;
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: auto;
+  }
+  .profile-wrapper {
+    display: none;
+  }
+  .nav-search .search {
+    display: none;
+  }
+  .logo-flex h1 {
+    display: none;
+  }
+  .nav-logo {
+    margin: 0;
+  }
+  .nav-search {
+    margin: 0;
+  }
+  .sidebar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: inherit;
+    color: #000000;
+    cursor: pointer;
+    border: none;
+    /* width: 100%; */
+    height: 100%;
+    /* padding: 10px 20px; */
+    font-size: 1.8rem;
+    font-weight: 500;
+
+    /* outline: none; */
+  }
+}

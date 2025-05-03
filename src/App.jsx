@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import "./App.css";
 import FindaRide from "./components/FindaRide";
 import axios from "axios";
-
+import Sidebar from "./components/Sidebar";
 function App() {
   const [count, setCount] = useState(0);
   const [routes, setRoutes] = useState([]);
@@ -29,6 +29,7 @@ function App() {
       <Navbar />
       <FindaRide />
       {/* <Calendar /> */}
+      {/* <Sidebar /> */}
     </div>
   );
 }

@@ -24,7 +24,8 @@ function FindaRide() {
             placeholder="1 passenger"
             max="8"
           />
-          <div>
+
+          <div className="submit-container">
             <button
               type="submit"
               onClick={(e) => {
