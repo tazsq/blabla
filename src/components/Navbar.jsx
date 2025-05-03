@@ -18,13 +18,6 @@ function Navbar() {
   function handleResize() {
     setIsMobile(window.innerWidth < 1191);
   }
-  // useEffect(() => {
-  //   first;
-
-  //   return () => {
-  //     second;
-  //   };
-  // }, []);
   function toggleSidebar() {
     setSidebarOpen(!sidebarOpen);
   }
@@ -43,7 +36,7 @@ function Navbar() {
           &#9776; {/* Unicode for hamburger icon */}
         </button>
       )}
-      <Sidebar isOpen={sidebarOpen} />
+      {isMobile && <Sidebar isOpen={sidebarOpen} />}
       <div className="logo-flex">
         <img src={logo} alt="logo" className="logo" />
         <h1>SathChalo</h1>

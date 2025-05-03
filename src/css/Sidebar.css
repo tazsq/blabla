@@ -34,7 +34,7 @@
     transform: translateX(-100%);
   }
 
-  .sidebar-list div {
+  .sidebar-list li {
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@
     justify-content: flex-start;
     /* top: 30px; */
   }
-  .open {
+  .sidebar-container.open {
     transform: translateX(0); /* slide in */
   }
   a {
