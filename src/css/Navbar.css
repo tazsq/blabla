@@ -55,44 +55,70 @@
 }
 
 .profile-wrapper {
-  background: #fff;
+  background: #a8cbd3;
   border-radius: 10px;
   padding: 7px 2px 3px 7px;
+  transition: background 0.3s ease;
 }
 
-.hide-dropdown {
-  display: none;
+.dropdown-wrapper.hide-dropdown {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none; /* prevents interaction while hidden */
+  transform: translateY(-20%);
 }
 .dropdown-wrapper {
   background-color: #002760;
   position: absolute;
+  display: flex;
   top: 75px;
   right: 50px;
-  /* margin: 5px 2px 5px 5px; */
-  /* padding: 10px 10px 10px 10px; */
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  /* transform: translateY(-10px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Add box shadow */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  /* opacity: 1;
+  transition: opacity 0.2s ease-in-out; */
+  /* max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;*/
+  /* pointer-events: none; */
+  max-height: 500px; /* enough to show all content */
+  opacity: 1;
+  overflow: hidden;
+  transition: transform 0.3s ease, max-height 0.3s ease, opacity 0.3s ease;
+  z-index: 100;
+  transform: translateY(0);
 }
+.dropdown-overlay {
+  position: fixed;
+  top: 75px; /* below navbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  z-index: 99; /* below dropdown (which is z-index: 100) */
+  transition: opacity 0.3s ease;
+}
+
 /* .dropdown-wrapper.open {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
 } */
 .list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   list-style-type: none;
-  /* background-color: #002760; */
   color: #fff;
-  display: block;
-  /* padding: 10px 200px 10px 200px; */
   padding: 10px 200px;
-  /* width: auto; */
+  transition: background 0.3s ease;
 }
-.list-item:first-child:hover {
+.list-item:first-child {
   padding: 10px 207px;
+  transition: background 0.3s ease;
 }
 .list-item:hover {
   background-color: #44608a;
@@ -102,7 +128,7 @@
   position: relative;
 }
 .profile-wrapper:hover {
-  background-color: #dad7cd;
+  background-color: #e0f2f1;
 }
 .nav-right {
   display: flex;

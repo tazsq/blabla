@@ -74,9 +74,12 @@ function Navbar() {
           />
         </div>
         <div className="dropdown-wrapper hide-dropdown">
-          <li className="list-item">login</li>
-          <li className="list-item">signup</li>
+          <li className="list-item">Login</li>
+          <li className="list-item">Sign up</li>
         </div>
+        {dropped && (
+          <div className="dropdown-overlay" onClick={handleDropdownClick}></div>
+        )}
       </div>
     </div>
   );

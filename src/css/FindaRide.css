@@ -54,6 +54,7 @@ hr {
   border-radius: 13px;
   margin: 2px;
   width: 100%;
+  transition: background 0.2s ease-out;
 }
 .find-a-ride-submit {
   display: flex;
@@ -79,6 +80,7 @@ hr {
   border-radius: 5px;
   margin-right: 5px;
   background-color: #fff;
+  transition: background 0.2s ease-out;
 }
 
 .find-a-ride-input input:focus {
@@ -88,7 +90,7 @@ hr {
 .find-a-ride-input:hover,
 .find-a-ride-input:hover input,
 .find-a-ride-input input:hover {
-  background-color: rgba(240, 240, 240, 0.986);
+  background: rgba(240, 240, 240, 0.986);
 }
 .find-a-ride-input-icon {
   display: flex;
