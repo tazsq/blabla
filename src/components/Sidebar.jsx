@@ -1,4 +1,5 @@
 import React from "react";
+import rightArrow from "../assets/right-arrow.png";
 import "../css/Sidebar.css";
 
 const Sidebar = ({ isOpen }) => {
@@ -7,16 +8,28 @@ const Sidebar = ({ isOpen }) => {
       <div className="sidebar-list-container">
         <ul className="sidebar-list">
           <li>
-            <a href="/home">Home</a>
+            <a href="/home">
+              <p>Home</p>
+              <img src={rightArrow} alt="right arrow" />
+            </a>
           </li>
           <li>
-            <a href="/about">About</a>
+            <a href="/about">
+              <p>About</p>
+              <img src={rightArrow} alt="right arrow" />
+            </a>
           </li>
           <li>
-            <a href="/login">Login</a>
+            <a href="/login">
+              <p>Login</p>
+              <img src={rightArrow} alt="right arrow" />
+            </a>
           </li>
           <li>
-            <a href="/signup">Sign up</a>
+            <a href="/signup">
+              <p>Sign up</p>
+              <img src={rightArrow} alt="right arrow" />
+            </a>
           </li>
         </ul>
       </div>

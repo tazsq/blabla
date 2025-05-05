@@ -12,11 +12,11 @@ import useEffect from "react";
 
 function Navbar() {
   const [dropped, setDropped] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function handleResize() {
-    setIsMobile(window.innerWidth < 1191);
+    setIsMobile(window.innerWidth < 769);
   }
   function toggleSidebar() {
     setSidebarOpen(!sidebarOpen);
@@ -31,11 +31,16 @@ function Navbar() {
   }
   return (
     <div className="navbar-css pos-relative">
-      {isMobile && (
-        <button className="sidebar-btn" onClick={toggleSidebar}>
-          &#9776; {/* Unicode for hamburger icon */}
-        </button>
-      )}
+      {isMobile &&
+        (sidebarOpen ? (
+          <button className="close-sidebar-btn" onClick={toggleSidebar}>
+            &times;
+          </button>
+        ) : (
+          <button className="open-sidebar-btn" onClick={toggleSidebar}>
+            &#9776;
+          </button>
+        ))}
       {isMobile && <Sidebar isOpen={sidebarOpen} />}
       <div className="logo-flex">
         <img src={logo} alt="logo" className="logo" />
