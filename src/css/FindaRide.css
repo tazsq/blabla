@@ -53,7 +53,7 @@ hr {
   border: none;
   border-radius: 13px;
   margin: 2px;
-  width: 240px;
+  width: 100%;
 }
 .find-a-ride-submit {
   display: flex;
