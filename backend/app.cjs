@@ -3,9 +3,9 @@ const path = require("node:path");
 const { authorController } = require("./controllers/authorController.cjs");
 const cors = require("cors");
 const app = express();
-const assetsPath = path.join(__dirname, "public");
-app.use(express.static(assetsPath));
-
+// const assetsPath = path.join(__dirname, "public");
+// app.use(express.static(assetsPath));
+app.use(express.static('dist'));
 app.use(express.json());
 app.use(cors());
 const PORT = 4001;
