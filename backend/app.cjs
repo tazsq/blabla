@@ -10,22 +10,15 @@ app.use(express.json());
 app.use(cors());
 const PORT = 4001;
 //using ejs
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
-//learning fundamentals of middleware
-
-const errorLogger = (req, res, next) => {
-  console.error("error");
-  next();
-};
+// app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "ejs");
 
 const routesRouter = require("./routes/routesRouter.cjs");
 const userRouter = require("./routes/userRouter.cjs");
 app.use("/api/routes", routesRouter);
 app.use("/api/users", userRouter);
 app.get("/api/authors/:authorId", authorController.get);
-app.use(errorLogger);
+
 app.listen(PORT, () => {
   console.log("server running");
 });
