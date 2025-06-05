@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static('dist'));
 app.use(express.json());
 app.use(cors());
-const PORT = 4001;
+const PORT = 3000;
 //using ejs
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "ejs");
