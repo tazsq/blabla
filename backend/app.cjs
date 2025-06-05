@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static('dist'));
 app.use(express.json());
 app.use(cors());
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 //using ejs
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "ejs");
@@ -19,6 +19,6 @@ app.use("/api/routes", routesRouter);
 app.use("/api/users", userRouter);
 app.get("/api/authors/:authorId", authorController.get);
 
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log("server running");
 });
