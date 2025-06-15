@@ -1,6 +1,6 @@
 const express = require("express");
 const routesRouter = express.Router();
-const routesController = require("../controllers/routesController.cjs");
+const routesController = require("../controllers/routesController.js");
 // const Route = require("../models/route.js");
 
 // routesRouter.get("/", (req, res) => {

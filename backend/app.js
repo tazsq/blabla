@@ -9,7 +9,7 @@ const requestLogger = (req, res, next) => {
   next();
 };
 app.use(requestLogger);
-const routesRouter = require("./routes/routesRouter.cjs");
+const routesRouter = require("./routes/routesRouter.js");
 app.use("/api/routes", routesRouter);
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });

@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.cjs",
+  "main": "app.js",
   "directories": {
     "test": "test"
   },
@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend && cd ../backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
-    "dev": "node --watch ./app.cjs"
+    "dev": "node --watch ./app.js"
   },
   "dependencies": {
     "axios": "^1.8.4",
@@ -23,5 +23,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "eslint": "^9.29.0",
+    "globals": "^16.2.0"
+  }
 }
