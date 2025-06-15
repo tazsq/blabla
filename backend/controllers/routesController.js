@@ -22,10 +22,10 @@ const routesController = {
     Route.find({})
       .then((routes) => {
         res.json(routes);
-        console.log(`data provided to response`);
+        console.log("data provided to response");
       })
       .catch((err) => {
-        console.log(`cannot find routes`);
+        console.log("cannot find routes");
         res.json(err);
       });
   },
@@ -39,7 +39,7 @@ const routesController = {
         data: savedRoute,
       });
 
-      console.log(`data saved`);
+      console.log("data saved");
     } catch (err) {
       next(err);
     }
@@ -48,10 +48,10 @@ const routesController = {
     Route.deleteMany({})
       .then((routes) => {
         res.json(routes);
-        console.log(`deleted~`);
+        console.log("deleted~");
       })
       .catch((err) => {
-        console.log(`cannot delete`);
+        console.log("cannot delete");
         res.json(err);
       });
   },
@@ -63,7 +63,7 @@ const routesController = {
       });
       const savedRoutes = await Promise.all(promises);
       res.json(savedRoutes);
-      console.log(`routes saved to DB successfully`);
+      console.log("routes saved to DB successfully");
     } catch (error) {
       console.log(`${error.message} not stored on DB`);
     }
