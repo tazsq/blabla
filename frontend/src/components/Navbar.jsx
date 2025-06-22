@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import { use, useState } from "react";
 import "../css/Navbar.css";
 import logo from "../assets/logo.png";
 import searchLogo from "../assets/search.png";
@@ -8,9 +7,10 @@ import profile from "../assets/profile.png";
 import downArrow from "../assets/down-arrow.png";
 import upArrow from "../assets/up-arrow.png";
 import Sidebar from "./Sidebar";
-import useEffect from "react";
+import Greeting from "./Greeting";
 
-function Navbar() {
+function Navbar(props) {
+  const { user, handleLogout } = props;
   const [dropped, setDropped] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -41,7 +41,7 @@ function Navbar() {
             &#9776;
           </button>
         ))}
-      {isMobile && <Sidebar isOpen={sidebarOpen} />}
+      {isMobile && <Sidebar isOpen={sidebarOpen} user={user} />}
       <div className="logo-flex">
         <img src={logo} alt="logo" className="logo" />
         <h1>SathChalo</h1>
@@ -64,23 +64,31 @@ function Navbar() {
           </a>
         </div>
       </div>
-      <div className="nav-search">
-        <div className="profile-wrapper" onClick={handleDropdownClick}>
-          <img src={profile} alt="" className="nav-logo" />
-          <img
-            src={dropped ? upArrow : downArrow}
-            alt={dropped ? "up arrow" : "down arrow"}
-            className="nav-logo"
-          />
-        </div>
-        <div className="dropdown-wrapper hide-dropdown">
-          <li className="list-item">Login</li>
-          <li className="list-item">Sign up</li>
-        </div>
-        {dropped && (
-          <div className="dropdown-overlay" onClick={handleDropdownClick}></div>
-        )}
-      </div>
+      {!isMobile &&
+        (user === null ? (
+          <div className="nav-search">
+            <div className="profile-wrapper" onClick={handleDropdownClick}>
+              <img src={profile} alt="" className="nav-logo" />
+              <img
+                src={dropped ? upArrow : downArrow}
+                alt={dropped ? "up arrow" : "down arrow"}
+                className="nav-logo"
+              />
+            </div>
+            <div className="dropdown-wrapper hide-dropdown">
+              <li className="list-item">Login</li>
+              <li className="list-item">Sign up</li>
+            </div>
+            {dropped && (
+              <div
+                className="dropdown-overlay"
+                onClick={handleDropdownClick}
+              ></div>
+            )}
+          </div>
+        ) : (
+          <Greeting user={user} handleLogout={handleLogout} />
+        ))}
     </div>
   );
 }

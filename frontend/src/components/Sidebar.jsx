@@ -2,7 +2,7 @@ import React from "react";
 import rightArrow from "../assets/right-arrow.png";
 import "../css/Sidebar.css";
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, user }) => {
   return (
     <div className={`sidebar-container ${isOpen ? "open" : ""}`}>
       <div className="sidebar-list-container">
@@ -19,15 +19,16 @@ const Sidebar = ({ isOpen }) => {
               <img src={rightArrow} alt="right arrow" />
             </a>
           </li>
+
           <li>
-            <a href="/login">
-              <p>Login</p>
+            <a href={user === null ? "/login" : "/dashboard"}>
+              <p>{user === null ? "Login" : "Dashboard"}</p>
               <img src={rightArrow} alt="right arrow" />
             </a>
           </li>
           <li>
-            <a href="/signup">
-              <p>Sign up</p>
+            <a href={user === null ? "/signup" : "/logout"}>
+              <p>{user === null ? "Sign up" : "Log out"}</p>
               <img src={rightArrow} alt="right arrow" />
             </a>
           </li>

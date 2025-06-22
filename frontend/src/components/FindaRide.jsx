@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "../css/FindaRide.css";
 import FormInput from "./FormInput";
 import circle from "../assets/circle.png";
 import calender from "../assets/calender.png";
 import user from "../assets/user.png";
 import { useState } from "react";
+import ErrorMessage from "./ErrorMessage";
 
 function FindaRide() {
   const [formData, setFormData] = useState({
@@ -13,15 +14,25 @@ function FindaRide() {
     date: "",
     passengerCount: "",
   });
+  const [error, setError] = useState("");
   useEffect(() => {
     console.log(formData);
   }, [formData]);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setError("");
+    if (name === "passengerCount" && value > 8) {
+      setError("Passengers should be less than or equal to 8");
+      setFormData({
+        ...formData,
+        [name]: formData.passengerCount,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,6 +92,7 @@ function FindaRide() {
           </div>
         </form>
       </div>
+      {error !== "" ? <ErrorMessage error={error} /> : null}
     </div>
   );
 }

@@ -1,23 +1,11 @@
 const mongoose = require("mongoose");
-require("dotenv").config();
-mongoose.set("strictQuery", false);
-
-const url = process.env.MONGODB_URI;
-
-// console.log("connecting to", url);
-mongoose
-  .connect(url)
-
-  .then(() => {
-    console.log("connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("error connecting to MongoDB:", error.message);
-  });
 
 const routeSchema = new mongoose.Schema({
-  from: { type: String, minLength: 3, required: true },
-  to: { type: String, minLength: 3, required: true },
+  from: { type: String, minLength: 2, required: true },
+  to: { type: String, minLength: 2, required: true },
+  // users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  driver: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  passengers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // multiple riders
 });
 
 routeSchema.set("toJSON", {

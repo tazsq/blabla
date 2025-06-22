@@ -1,0 +1,91 @@
+/* Reset */
+@import url("./global.css");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font: var(--find-a-ride-header-style); */
+}
+
+/* Container */
+.login-container {
+  font: var(--find-a-ride-header-style);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  background: #f0f4f8;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  min-height: 75vh;
+  min-width: 60vw;
+}
+/* .login-input-block > .find-a-ride-input:hover,
+.find-a-ride-input:hover input,
+.find-a-ride-input input:hover {
+  background: rgb(255, 255, 255);
+  border: 1px solid black;
+} */
+/* Header */
+.login-header h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  /* margin-bottom: 1rem; */
+  margin-bottom: 24px;
+}
+.login-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+}
+/* Inputs Block */
+.login-input-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Submit Container */
+.login-submit {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.login-input-block > div {
+  /* border: 2px solid black; Your custom hover effect */
+  border-radius: 10px;
+  background-color: white;
+}
+/* Submit Button */
+.login-submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  height: 48px;
+  background: linear-gradient(135deg, #00bcd4, #2196f3);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.login-submit-button:hover {
+  background: linear-gradient(135deg, #2196f3, #00bcd4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
