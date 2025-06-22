@@ -6,7 +6,7 @@ const usersController = {
   login: async (request, response, next) => {
     try {
       const { username, password } = request.body;
-
+      console.log(request.body);
       const user = await User.findOne({ username });
       const passwordCorrect =
         user === null
