@@ -1,0 +1,397 @@
+@import url(./global.css);
+
+.ride-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.ride-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: #00bcd4;
+}
+
+.ride-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.route-info {
+  flex: 1;
+}
+
+.route-cities {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.from-city,
+.to-city {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-transform: capitalize;
+}
+
+.route-arrow {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+
+.route-date {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.ride-price {
+  text-align: right;
+}
+
+.price-amount {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #00bcd4;
+  line-height: 1;
+}
+
+.price-label {
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+}
+
+.ride-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px 0;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.driver-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.driver-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00bcd4, #2196f3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.driver-details {
+  flex: 1;
+}
+
+.driver-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+
+.driver-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rating-stars {
+  color: #ffc107;
+  font-size: 14px;
+}
+
+.rating-text {
+  font-size: 12px;
+  color: #666;
+}
+
+.ride-details {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.departure-time,
+.available-seats {
+  text-align: center;
+}
+
+.time,
+.seats-count {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.time-label,
+.seats-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.ride-card-footer {
+  display: flex;
+  gap: 12px;
+}
+
+.book-ride-btn,
+.view-details-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.book-ride-btn {
+  background: linear-gradient(135deg, #00bcd4, #2196f3);
+  color: white;
+}
+
+.book-ride-btn:hover {
+  background: linear-gradient(135deg, #2196f3, #00bcd4);
+  transform: translateY(-1px);
+}
+
+.view-details-btn {
+  background: #f8f9fa;
+  color: #666;
+  border: 1px solid #e9ecef;
+}
+
+.view-details-btn:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .ride-card {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .ride-card-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .route-cities {
+    flex-wrap: wrap;
+  }
+
+  .from-city,
+  .to-city {
+    font-size: 16px;
+  }
+
+  .ride-card-body {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .driver-info {
+    width: 100%;
+  }
+
+  .ride-details {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .ride-card-footer {
+    flex-direction: column;
+  }
+}
+
+/* Desktop Enhancements */
+@media (min-width: 1024px) {
+  .ride-card {
+    padding: 24px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .ride-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .ride-card-header {
+    margin-bottom: 20px;
+  }
+
+  .route-cities {
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .from-city,
+  .to-city {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .route-arrow {
+    width: 20px;
+    height: 20px;
+  }
+
+  .route-date {
+    font-size: 15px;
+  }
+
+  .price-amount {
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .price-label {
+    font-size: 13px;
+  }
+
+  .ride-card-body {
+    margin-bottom: 24px;
+    padding: 20px 0;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .driver-info {
+    flex: 2;
+    gap: 16px;
+  }
+
+  .driver-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 18px;
+  }
+
+  .driver-name {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .driver-rating {
+    gap: 8px;
+  }
+
+  .rating-stars {
+    font-size: 16px;
+  }
+
+  .rating-text {
+    font-size: 13px;
+  }
+
+  .ride-details {
+    flex: 1;
+    gap: 32px;
+    justify-content: flex-end;
+  }
+
+  .time,
+  .seats-count {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .time-label,
+  .seats-label {
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .ride-card-footer {
+    gap: 16px;
+    margin-top: auto;
+  }
+
+  .book-ride-btn,
+  .view-details-btn {
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 10px;
+  }
+
+  .book-ride-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 188, 212, 0.3);
+  }
+
+  .view-details-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .ride-card {
+    padding: 28px;
+    min-height: 320px;
+  }
+
+  .from-city,
+  .to-city {
+    font-size: 24px;
+  }
+
+  .price-amount {
+    font-size: 28px;
+  }
+
+  .driver-avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 20px;
+  }
+
+  .driver-name {
+    font-size: 20px;
+  }
+
+  .time,
+  .seats-count {
+    font-size: 20px;
+  }
+}

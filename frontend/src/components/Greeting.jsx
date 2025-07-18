@@ -7,7 +7,7 @@ function Greeting(props) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "0.1rem" }}>
       <Menu secondary style={{ padding: "0.8rem 1.5rem" }}>
-        <Menu.Item header>Hi, {user.name}</Menu.Item>
+        <Menu.Item header>Hi, {user.username}</Menu.Item>
 
         <Menu.Menu position="right">
           {user && (
@@ -25,7 +25,7 @@ function Greeting(props) {
                     avatar
                     src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.username}`}
                     alt="avatar"
-                    title={user.name}
+                    title={user.username}
                   />
                 </span>
               }
@@ -33,7 +33,7 @@ function Greeting(props) {
               icon={null}
             >
               <Dropdown.Menu>
-                <Dropdown.Header content={user.name} />
+                <Dropdown.Header content={user.username} />
                 <Dropdown.Item text="Profile" icon="user" />
                 <Dropdown.Item
                   text="Logout"

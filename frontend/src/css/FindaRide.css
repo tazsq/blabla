@@ -11,8 +11,9 @@ body {
   font: var(--find-a-ride-header-style);
 }
 ::placeholder {
+  /* font-family: inherit; */
   font-family: var(--find-a-ride-header-font);
-  font-weight: 500;
+  /* font-weight: 500; */
 }
 .find-a-ride {
   display: flex;
@@ -41,6 +42,7 @@ hr {
   display: flex;
   /* align-content: center; */
   justify-content: center;
+  box-shadow: 4px 5px 18px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   border-radius: 16px;
 }

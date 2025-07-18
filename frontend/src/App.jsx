@@ -1,16 +1,48 @@
-import { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
+import { createContext, useEffect, useState } from "react";
+import {
+  Link,
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 import "./App.css";
+
+import CreateaRide from "./components/CreateaRide";
 import FindaRide from "./components/FindaRide";
 import Login from "./components/Login";
-import loginService from "./services/login";
+import Navbar from "./components/Navbar";
+import PaymentGateway from "./components/PaymentGateway";
+import RidesList from "./components/RidesList";
 import Signup from "./components/Signup";
+import loginService from "./services/login";
 function App() {
   const [user, setUser] = useState(null);
+  const UserContext = createContext();
+
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem("loggedInUser");
     if (loggedInUser) {
       const user = JSON.parse(loggedInUser);
+      console.log(user);
+      //verify through backend endpoint if token expired or not
+
+      try {
+        const payload = JSON.parse(atob(user.token.split(".")[1]));
+        console.log(payload, "-----payload");
+        const now = Date.now();
+        console.log(payload.exp, "---------payload.exp");
+        if (payload.exp * 1000 < now) {
+          // Token expired
+          handleLogout(); // Clear localStorage and redirect
+        } else {
+          // Token valid → maybe setUser(), etc.
+          console.log("Token still valid");
+        }
+      } catch (err) {
+        console.log(err);
+        handleLogout(); // Malformed token
+      }
       setUser(user);
       loginService.setToken(user.token);
     }
@@ -19,36 +51,38 @@ function App() {
     window.localStorage.removeItem("loggedInUser");
     setUser(null);
   };
-  // const [count, setCount] = useState(0);
-  // const [routes, setRoutes] = useState([]);
-  // const baseUrl = "/api";
-  // const hook = () => {
-  //   axios.get(`${baseUrl}/routes/`).then((resp) => {
-  //     console.log(resp.data);
-  //     setRoutes(resp.data);
-  //   });
-  // const addRoute = () => {
-  //   const newRoute = {
-  //     from: "nashik",
-  //     to: "nagpur",
-  //   };
-  //   // axios
-  //   //   .post("http://localhost:3000/api/routes", newRoute)
-  //   //   .then((resp) => console.log(resp));
-  // };
-  // addRoute();
-  // };
-  // useEffect(hook, []);
-  // console.log(user);
   return (
-    <div className="app">
-      <Navbar user={user} handleLogout={handleLogout} />
-      {user === null ? <Login setUser={setUser} /> : <FindaRide />}
-      <Signup setUser={setUser} />
-      {/* <FindaRide /> */}
-      {/* <Calendar /> */}
-      {/* <Sidebar /> */}
-    </div>
+    <UserContext.Provider value={{ user, setUser }}>
+      <Router>
+        <div className="app">
+          <Navbar user={user} handleLogout={handleLogout} />
+          <Routes>
+            {user === null ? (
+              <>
+                <Route
+                  path="/test-payment-gateway"
+                  element={<PaymentGateway />}
+                />
+                <Route path="/" element={<Login setUser={setUser} />} />
+                <Route path="/signup" element={<Signup setUser={setUser} />} />
+                <Route path="*" element={<Login setUser={setUser} />} />
+              </>
+            ) : (
+              <>
+                <Route path="/find" element={<FindaRide user={user} />} />
+                <Route path="/create" element={<CreateaRide user={user} />} />
+                <Route path="/rides" element={<RidesList user={user} />} />
+                <Route path="/" element={<Navigate to="/find" />} />
+              </>
+            )}
+          </Routes>
+          {/* <RidesList user={user} /> */}
+          {/* <Filter /> */}
+          {/* <Calendar /> */}
+          {/* <Sidebar /> */}
+        </div>
+      </Router>
+    </UserContext.Provider>
   );
 }
 

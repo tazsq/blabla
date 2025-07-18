@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+const config = require("./config");
 const requestLogger = (req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
@@ -13,6 +15,19 @@ const tokenExtractor = (req, res, next) => {
     req.token = null;
   }
   next();
+};
+
+const tokenVerifier = (req, resp, next) => {
+  try {
+    if (!req.token) {
+      return resp.status(401).json({ error: "token not provided" });
+    }
+    const token = req.token;
+    const decodedToken = jwt.verify(token, config.SECRET);
+    return decodedToken;
+  } catch (err) {
+    next(err);
+  }
 };
 const errorHandler = (err, req, resp, next) => {
   console.log(err.message);
@@ -39,4 +54,5 @@ module.exports = {
   unknownEndpoint,
   errorHandler,
   tokenExtractor,
+  tokenVerifier,
 };

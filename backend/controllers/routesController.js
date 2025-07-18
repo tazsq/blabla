@@ -2,7 +2,6 @@ const Route = require("../models/route.js");
 const User = require("../models/user.js");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config.js");
-const usersController = require("./usersController.js");
 
 // const routes = [
 //   {
@@ -23,12 +22,91 @@ const usersController = require("./usersController.js");
 //   },
 // ];
 const routesController = {
-  get: async (req, res, next) => {
+  getAllRides: async (req, res, next) => {
     try {
+      if (!req.token) {
+        return res.status(401).json({ error: "token not provided" });
+      }
+      const decodedToken = jwt.verify(req.token, config.SECRET);
+      console.log(decodedToken);
+      if (!decodedToken.id) {
+        return res.status(401).json({ error: "token invalid" });
+      }
+      const user = await User.findById(decodedToken.id);
+      // const user = await User.findById(req.body.driver);
+      if (!user) {
+        return res.status(400).json({ error: "userId missing or not valid" });
+      }
       const routes = await Route.find({}).populate("driver", {
         name: 1,
         username: 1,
       });
+      return res.status(200).json(routes);
+      console.log("data provided to response");
+    } catch (error) {
+      next(error);
+      console.log(error);
+    }
+  },
+  get: async (req, res, next) => {
+    try {
+      if (!req.token) {
+        return res.status(401).json({ error: "token not provided" });
+      }
+      const decodedToken = jwt.verify(req.token, config.SECRET);
+      console.log(decodedToken);
+      if (!decodedToken.id) {
+        return res.status(401).json({ error: "token invalid" });
+      }
+      const user = await User.findById(decodedToken.id);
+      // const user = await User.findById(req.body.driver);
+      if (!user) {
+        return res.status(400).json({ error: "userId missing or not valid" });
+      }
+      const {
+        from,
+        to,
+        date,
+        passengersRequired: passengerCapacity,
+        filter: queryFilter,
+      } = req.query;
+      if (!from || !to)
+        return res
+          .status(400)
+          .json({ err: "from and to fields should be defined" });
+      const filter = {};
+      filter.from = from.toLowerCase();
+      filter.to = to.toLowerCase();
+      if (date !== "") {
+        const dateStart = new Date(date);
+        const dateEnd = new Date(dateStart);
+        dateEnd.setDate(dateEnd.getDate() + 1);
+        filter.date = { $gte: dateStart, $lt: dateEnd };
+      }
+      if (passengerCapacity !== "") {
+        filter.passengerCapacity = passengerCapacity;
+      }
+      filter.$expr = {
+        $and: [
+          { $lt: [{ $size: "$passengers" }, "$passengerCapacity"] },
+          // {
+          //   $gt: ["$date", new Date()],
+          // },
+        ],
+      };
+      // if (queryFilter !== "") {
+      //   if (queryFilter === "availableOnly") {
+      //     filter.$expr = {
+      //       $lt: [{ $size: "$passengers" }, "$passengerCapacity"],
+      //     };
+      //   }
+      // }
+      const routes = await Route.find(filter).populate("driver", {
+        name: 1,
+        username: 1,
+        createdRoutes: 1,
+      });
+      console.log(routes);
       res.status(200).json(routes);
       console.log("data provided to response");
     } catch (err) {
@@ -54,9 +132,11 @@ const routesController = {
         return res.status(400).json({ error: "userId missing or not valid" });
       }
       const route = new Route({
-        from: req.body.from,
-        to: req.body.to,
+        from: req.body.from.toLowerCase(),
+        to: req.body.to.toLowerCase(),
+        passengerCapacity: req.body.passengerCapacity,
         driver: user.id,
+        date: req.body.date,
         passengers: [],
       });
       const savedRoute = await route.save();
@@ -140,7 +220,7 @@ const routesController = {
     }
   },
   updateById: async (req, res, next) => {
-    const { from, to } = req.body;
+    const { from, to, date, passengerCapacity } = req.body;
     try {
       const route = await Route.findById(req.params.id);
       if (!route) {
@@ -148,10 +228,54 @@ const routesController = {
       }
       route.from = from;
       route.to = to;
+      route.date = date;
+      route.passengerCapacity = passengerCapacity;
       const savedRoute = await route.save();
       return res.status(200).json(savedRoute);
     } catch (err) {
       next(err);
+    }
+  },
+  book: async (req, res, next) => {
+    try {
+      //validate token
+      if (!req.token) {
+        return res.status(401).json({ error: "token not provided" });
+      }
+      const decodedToken = jwt.verify(req.token, config.SECRET);
+      console.log(decodedToken);
+      if (!decodedToken.id) {
+        return res.status(401).json({ error: "token invalid" });
+      }
+      const user = await User.findById(decodedToken.id);
+      if (!user) {
+        return res.status(400).json({ error: "userId missing or not valid" });
+      }
+      //push route id to user joinedRoutes array
+      //push user id to route passengers array
+      if (!req.body) return res.status(400).json({ error: "no req body" });
+      // const route = new Route({
+      //   from: req.body.from.toLowerCase(),
+      //   to: req.body.to.toLowerCase(),
+      //   passengerCapacity: req.body.passengerCapacity,
+      //   driver: user.id,
+      //   date: req.body.date,
+      //   passengers: [],
+      // });
+      const route = await Route.findById(req.body.id);
+      if (!route)
+        return res.status(404).json({ error: "no route found by given id" });
+      if (route.passengers.length >= route.passengerCapacity) {
+        return res.status(400).json({ error: "this ride is full;)" });
+      }
+      user.joinedRoutes.push(req.body.id);
+      route.passengers.push(user.id);
+
+      const newUser = await user.save();
+      const newRoute = await route.save();
+      return res.status(200).json({ savedUser: newUser, savedRoute: newRoute });
+    } catch (error) {
+      next(error);
     }
   },
 };

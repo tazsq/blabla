@@ -1,0 +1,151 @@
+/* Additional Desktop-Specific Enhancements */
+@import url(./global.css);
+
+/* Desktop-specific animations and interactions */
+@media (min-width: 1023px) {
+  /* Staggered animation for ride cards */
+  .rides-grid .ride-card {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .rides-grid .ride-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .rides-grid .ride-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .rides-grid .ride-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .rides-grid .ride-card:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .rides-grid .ride-card:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  .rides-grid .ride-card:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Enhanced hover effects for desktop */
+  .ride-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ride-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .ride-card:hover::before {
+    left: 100%;
+  }
+
+  /* Desktop-specific button styles */
+  .book-ride-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-ride-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  .book-ride-btn:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Desktop typography improvements */
+  .ride-card {
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Desktop-specific spacing and layout */
+  .rides-list-container {
+    background: linear-gradient(135deg, #fafbfc 0%, #ffffff 100%);
+    min-height: calc(100vh - 75px);
+  }
+
+  /* Enhanced focus states for accessibility */
+  .book-ride-btn:focus,
+  .view-details-btn:focus {
+    outline: 3px solid rgba(0, 188, 212, 0.3);
+    outline-offset: 2px;
+  }
+
+  /* Desktop-specific loading animation */
+  .loading-spinner {
+    background: conic-gradient(from 0deg, #00bcd4, #2196f3, #00bcd4);
+    border: none;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .loading-spinner::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background: white;
+    border-radius: 50%;
+  }
+}
+
+/* Desktop-specific utility classes */
+@media (min-width: 1023px) {
+  .desktop-only {
+    display: block !important;
+  }
+
+  .mobile-only {
+    display: none !important;
+  }
+
+  /* Desktop-specific grid variations */
+  .rides-grid.compact {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 20px;
+  }
+
+  .rides-grid.spacious {
+    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    gap: 32px;
+  }
+}

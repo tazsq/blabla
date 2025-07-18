@@ -6,6 +6,7 @@ import ErrorMessage from "./ErrorMessage.jsx";
 import SuccessMsg from "./SuccessMsg.jsx";
 import "../css/Login.css";
 import signupService from "../services/signup.js";
+import { Link } from "react-router-dom";
 function Signup(props) {
   const { setUser } = props;
   const [name, setName] = useState("");
@@ -17,6 +18,7 @@ function Signup(props) {
   const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     setUser(null);
+    // window.localStorage.removeItem("loggedInUser");
     setDisabled(false); // clear token on initial mount (dev only)
   }, []);
 
@@ -70,7 +72,7 @@ function Signup(props) {
   };
 
   return (
-    <div className={"login-container"} style={{ border: "2px solid black" }}>
+    <div className={"login-container"}>
       <div className={"login-header"}>
         <h1>Signup</h1>
       </div>
@@ -83,6 +85,7 @@ function Signup(props) {
           value={name}
           handleChange={handleNameChange}
           disabled={loading || disabled}
+          label={true}
         />
         <FormInput
           placeholder={"Enter you username"}
@@ -91,6 +94,7 @@ function Signup(props) {
           handleChange={handleUsernameChange}
           disabled={loading || disabled}
           required={true}
+          label={true}
         />
         <FormInput
           placeholder={"Enter your password"}
@@ -100,19 +104,14 @@ function Signup(props) {
           handleChange={handlePasswordChange}
           disabled={loading || disabled}
           required={true}
+          label={true}
         />
-        {/* <Loader size="medium">Loading</Loader> */}
-        <div className={"login-submit"}>
-          <Button
-            type="submit"
-            loading={loading}
-            secondary
-            className={"login-submit-button"}
-            disabled={loading || disabled}
-          >
-            Signup
-          </Button>
+        <div className="submit-container login-btn">
+          <button type="submit" className="find-a-ride-submit login-btn-inside">
+            Sign up
+          </button>
         </div>
+        <Link to="/">Log in?</Link>
       </form>
     </div>
   );

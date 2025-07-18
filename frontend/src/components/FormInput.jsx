@@ -9,14 +9,21 @@ function FormInput({
   handleChange,
   disabled,
   required,
+  label,
+  className,
 }) {
+  const id = placeholder.toLowerCase().replace(/\s/g, "-");
   return (
-    <div className="find-a-ride-input">
+    <div className={`find-a-ride-input ${className}`}>
       <div className="find-a-ride-input-icon">
         {icon ? <img src={icon} alt="" height={25} width={25} /> : null}
         {/* <img src={icon} alt="" height={25} width={25} /> */}
       </div>
-
+      {label && (
+        <label htmlFor={id} className="form-label">
+          {label}
+        </label>
+      )}
       {type === "number" ? (
         <input
           type={type}
@@ -28,6 +35,7 @@ function FormInput({
           value={value}
           disabled={disabled}
           required={required}
+          // className={className}
         />
       ) : (
         <input
@@ -37,6 +45,7 @@ function FormInput({
           value={value}
           name={name}
           disabled={disabled}
+          // className={className}
           required={required}
         />
       )}

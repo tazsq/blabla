@@ -1,12 +1,14 @@
 // import React from "react";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import FormInput from "./FormInput.jsx";
-import { Button } from "semantic-ui-react";
+import { Button, Label } from "semantic-ui-react";
 import ErrorMessage from "./ErrorMessage.jsx";
 import "../css/Login.css";
 import loginService from "../services/login.js";
+import { Link, Navigate } from "react-router-dom";
 function Login(props) {
-  const { children, setUser } = props;
+  const { setUser } = props;
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +16,7 @@ function Login(props) {
   const [error, setError] = useState("");
   useEffect(() => {
     setUser(null); // clear token on initial mount (dev only)
+    // window.localStorage.removeItem('loggedInUser');
   }, []);
   console.log(username, password);
   const handleNameChange = (e) => {
@@ -40,7 +43,7 @@ function Login(props) {
     try {
       const credentials = { name, username, password };
       const response = await loginService.login(credentials);
-
+      // console.log(response);
       if (response.token) {
         loginService.setToken(response.token);
         window.localStorage.setItem("loggedInUser", JSON.stringify(response));
@@ -65,9 +68,9 @@ function Login(props) {
   };
 
   return (
-    <div className={"login-container"} style={{ border: "2px solid black" }}>
+    <div className={"login-container"}>
       <div className={"login-header"}>
-        <h1>{children || "Login"}</h1>
+        <h1>Login</h1>
       </div>
       <form className={"login-input-block"} onSubmit={handleLogin}>
         {error ? <ErrorMessage error={error} /> : null}
@@ -77,6 +80,7 @@ function Login(props) {
           value={name}
           handleChange={handleNameChange}
           disabled={loading}
+          label={true}
         />
         <FormInput
           placeholder={"Enter you username"}
@@ -85,6 +89,7 @@ function Login(props) {
           handleChange={handleUsernameChange}
           disabled={loading}
           required={true}
+          label={true}
         />
         <FormInput
           placeholder={"Enter your password"}
@@ -94,9 +99,10 @@ function Login(props) {
           handleChange={handlePasswordChange}
           disabled={loading}
           required={true}
+          label={true}
         />
         {/* <Loader size="medium">Loading</Loader> */}
-        <div className={"login-submit"}>
+        {/* <div className={"login-submit"}>
           <Button
             loading={loading}
             secondary
@@ -105,10 +111,31 @@ function Login(props) {
           >
             Login
           </Button>
+        </div> */}
+        <div className="submit-container login-btn">
+          <button
+            type="submit"
+            className="find-a-ride-submit login-btn-inside"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <span className="loader"></span>
+              </>
+            ) : (
+              "Log in"
+            )}
+          </button>
         </div>
+        <Link to="/signup">Sign up?</Link>
+        <Link to="/test-payment-gateway">
+          Link to new payment gateway i built!
+        </Link>
       </form>
     </div>
   );
 }
-
+Login.propTypes = {
+  setUser: PropTypes.func.isRequired,
+};
 export default Login;

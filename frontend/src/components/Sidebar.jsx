@@ -1,6 +1,7 @@
 import React from "react";
 import rightArrow from "../assets/right-arrow.png";
 import "../css/Sidebar.css";
+import { ChevronRight } from "lucide-react";
 
 const Sidebar = ({ isOpen, user }) => {
   return (
@@ -10,26 +11,28 @@ const Sidebar = ({ isOpen, user }) => {
           <li>
             <a href="/home">
               <p>Home</p>
-              <img src={rightArrow} alt="right arrow" />
+              {/* <img src={rightArrow} alt="right arrow" /> */}
+              <ChevronRight size={18} strokeWidth={2} />
             </a>
           </li>
           <li>
             <a href="/about">
               <p>About</p>
-              <img src={rightArrow} alt="right arrow" />
+              {/* <img src={rightArrow} alt="right arrow" /> */}
+              <ChevronRight size={18} strokeWidth={2} />
             </a>
           </li>
 
           <li>
             <a href={user === null ? "/login" : "/dashboard"}>
               <p>{user === null ? "Login" : "Dashboard"}</p>
-              <img src={rightArrow} alt="right arrow" />
+              <ChevronRight size={18} strokeWidth={2} />
             </a>
           </li>
           <li>
             <a href={user === null ? "/signup" : "/logout"}>
               <p>{user === null ? "Sign up" : "Log out"}</p>
-              <img src={rightArrow} alt="right arrow" />
+              <ChevronRight size={18} strokeWidth={2} />
             </a>
           </li>
         </ul>
