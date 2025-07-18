@@ -9,7 +9,7 @@ const Sidebar = ({ isOpen, user }) => {
       <div className="sidebar-list-container">
         <ul className="sidebar-list">
           <li>
-            <a href="/home">
+            <a href="/">
               <p>Home</p>
               {/* <img src={rightArrow} alt="right arrow" /> */}
               <ChevronRight size={18} strokeWidth={2} />
