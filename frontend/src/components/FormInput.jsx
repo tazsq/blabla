@@ -35,7 +35,6 @@ function FormInput({
           value={value}
           disabled={disabled}
           required={required}
-          // className={className}
         />
       ) : (
         <input
@@ -45,12 +44,10 @@ function FormInput({
           value={value}
           name={name}
           disabled={disabled}
-          // className={className}
           required={required}
         />
       )}
     </div>
   );
 }
-
 export default FormInput;

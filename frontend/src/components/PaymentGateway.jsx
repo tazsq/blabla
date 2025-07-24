@@ -1,14 +1,45 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import fourDots from "../assets/4-dots.svg";
 import cardIcon from "../assets/card-nn.svg";
 import edit from "../assets/edit.svg";
 import solanaIcon from "../assets/solana.svg";
 import "../css/PaymentGateway.css";
+import useTimer from "../hooks/useTimer.js";
+import LearnTs from "../components/LearnTs";
 function Input() {
+  const timer = useTimer(10);
   return (
     <div className="pay-gate-wrapper">
+      <LearnTs />
       <div className="payment-gateway">
         <form className="payment-gateway-left">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              timer.pause();
+            }}
+          >
+            Pause
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              timer.resume();
+            }}
+          >
+            resume
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              timer.reset();
+            }}
+          >
+            reset
+          </button>
+          <p className="logout-timer">
+            <span className="timer">{`${timer.minutes}:${timer.seconds}`}</span>
+          </p>
           <div className="input-container-1">
             <div className="label-and-edit-btn">
               <div className="label">

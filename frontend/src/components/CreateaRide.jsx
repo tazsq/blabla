@@ -16,6 +16,8 @@ function CreateaRide(props) {
     to: "",
     date: "",
     passengerCapacity: "",
+    startTime: "",
+    endTime: "",
   });
   const [successmsg, setSuccessmsg] = useState("");
   const [error, setError] = useState("");
@@ -46,7 +48,9 @@ function CreateaRide(props) {
         !formData.date ||
         !formData.from ||
         !formData.passengerCapacity ||
-        !formData.to
+        !formData.to ||
+        !formData.startTime ||
+        !formData.endTime
       ) {
         setError("Enter all values");
         setSuccessmsg("");
@@ -116,6 +120,26 @@ function CreateaRide(props) {
             max="8"
             name="passengerCapacity"
             value={formData.passengerCapacity}
+            handleChange={handleChange}
+          />
+          <hr className="hr" />
+
+          <FormInput
+            icon={userpng}
+            type="time"
+            placeholder="Enter start time"
+            name="startTime"
+            value={formData.startTime}
+            handleChange={handleChange}
+          />
+          <hr className="hr" />
+
+          <FormInput
+            icon={userpng}
+            type="time"
+            placeholder="Enter end time"
+            name="endTime"
+            value={formData.endTime}
             handleChange={handleChange}
           />
 

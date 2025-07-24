@@ -16,6 +16,7 @@ import PaymentGateway from "./components/PaymentGateway";
 import RidesList from "./components/RidesList";
 import Signup from "./components/Signup";
 import loginService from "./services/login";
+import Details from "./components/Details";
 function App() {
   const [user, setUser] = useState(null);
   const UserContext = createContext();
@@ -59,10 +60,8 @@ function App() {
           <Routes>
             {user === null ? (
               <>
-                <Route
-                  path="/test-payment-gateway"
-                  element={<PaymentGateway />}
-                />
+                <Route path="/details" element={<Details />} />
+                <Route path="/payment-gateway" element={<PaymentGateway />} />
                 <Route path="/" element={<Login setUser={setUser} />} />
                 <Route path="/signup" element={<Signup setUser={setUser} />} />
                 <Route path="*" element={<Login setUser={setUser} />} />

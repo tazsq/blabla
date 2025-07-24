@@ -27,9 +27,9 @@ hr {
   border: 0 solid rgba(211, 211, 211, 0);
   border-left: 1px solid;
   width: 1px;
-  height: 32px;
+  height: 32px !important;
   flex: none;
-  margin: auto 0;
+  margin: auto 0 !important;
 }
 
 .find-a-ride-header {
@@ -123,11 +123,11 @@ hr {
   }
 
   .form hr {
-    width: 80vw;
-    height: 1px;
+    width: 80vw !important;
+    height: 1px !important;
     background-color: rgba(237, 237, 237, 1);
     border: none;
-    margin: 0 auto;
+    margin: 0 auto !important;
   }
 
   .find-a-ride-input {

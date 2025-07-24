@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./main.css";
+import "./index.css";
 import App from "./App.jsx";
 import "semantic-ui-css/semantic.min.css";
 // import axios from "axios";

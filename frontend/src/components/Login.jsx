@@ -128,9 +128,7 @@ function Login(props) {
           </button>
         </div>
         <Link to="/signup">Sign up?</Link>
-        <Link to="/test-payment-gateway">
-          Link to new payment gateway i built!
-        </Link>
+        <Link to="/payment-gateway">Link to new payment gateway i built!</Link>
       </form>
     </div>
   );

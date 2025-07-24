@@ -4,6 +4,15 @@
   box-sizing: border-box;
   font-family: "Nunito Sans", sans-serif;
 }
+.logout-timer {
+  padding: 0 0.3rem;
+  margin-top: 1.9rem;
+  text-align: right;
+  font-size: 1.25rem;
+}
+.timer {
+  font-weight: 600;
+}
 .last-input-container {
   padding-bottom: 3.3rem !important;
 }
@@ -62,27 +71,27 @@
 }
 .balance-in-solana-ccn {
   position: absolute;
-  top: 19.3rem;
+  top: 20.7rem;
   font-size: 0.9rem;
-  left: 12.9rem;
+  left: 3.5rem;
   font-weight: 600;
 }
 .credit-card-name {
   position: absolute;
   top: 14rem;
   font-size: 0.8rem;
-  left: 13.1rem;
-  font-weight: 300;
+  left: 3.5rem;
+  font-weight: 500;
 }
 .ccn-last-four-digits {
   position: absolute;
   top: 15.6rem;
-  left: 16rem;
+  left: 6.5rem;
 }
 .four-dots {
   position: absolute;
   top: 16.1rem;
-  left: 13rem;
+  left: 3.6rem;
 }
 .payment-summary-hr {
   width: 175.4px;
@@ -100,13 +109,13 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 100vh;
+  height: 85vh;
   width: fit-content; /* or a fixed width like 200px */
-  padding-top: 108px;
+  padding-top: 94px;
 }
 .card-outer {
   position: absolute;
-  top: -160px;
+  top: -156px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -151,7 +160,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 9.7rem;
+  gap: 3.7rem;
 }
 .card {
   position: relative;
@@ -159,12 +168,12 @@
 .card::before {
   content: "";
   position: absolute;
-  top: 81.6px;
-  left: 238.4px;
+  top: 100.6px;
+  left: 110.2px;
   transform: translateX(-50%);
   width: 80px;
   height: 40px;
-  background: rgb(0 102 255 / 19%);
+  background: rgb(0 102 255 / 20%);
   filter: blur(25px);
   border-radius: 0;
   z-index: 1;
@@ -175,15 +184,15 @@
   width: 47.7px;
   border-radius: 1px;
   background: #1163fd;
-  top: 5.1rem;
-  left: 15.7rem;
+  top: 6.2rem;
+  left: 6.1rem;
 }
 .card-svg {
-  height: 344.8px;
-  width: 492.8px;
+  height: 380.8px;
+  width: 218.8px;
 }
 .payment-gateway-left {
-  height: 468px;
+  height: 358px;
   width: 600px;
 }
 .input-container-1 {
@@ -212,6 +221,7 @@
   color: #1d2849;
   transition: all 0.3s;
   text-align: center;
+  font-family: "Poppins", "Nunito Sans", sans-serif;
 }
 .input-box-ccn {
   outline: none;
@@ -297,6 +307,7 @@
 }
 input {
   caret-color: #4973cd;
+  line-height: 30px;
 }
 @media (width< 769px) {
   .input-container {
