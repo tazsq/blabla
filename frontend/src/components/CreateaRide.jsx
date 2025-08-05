@@ -13,14 +13,6 @@ import SuccessMsg from "./SuccessMsg";
 function CreateaRide() {
   const { user } = useContext(UserContext);
   let navigate = useNavigate();
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
-  if (user === null) {
-    return null;
-  }
   const [formData, setFormData] = useState({
     from: "",
     to: "",
@@ -34,6 +26,14 @@ function CreateaRide() {
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+  useEffect(() => {
+    if (user === null) {
+      navigate("/login", { replace: true });
+    }
+  }, [user, navigate]);
+  if (user === null) {
+    return null;
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setError("");
