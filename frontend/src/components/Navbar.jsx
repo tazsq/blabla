@@ -1,13 +1,14 @@
 import { ChevronRight, PlusCircle, Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
 import profile from "../assets/profile.png";
 import "../css/Navbar.css";
 import Greeting from "./Greeting";
 import Sidebar from "./Sidebar";
+import UserContext from "../contexts/UserContext";
 
-function Navbar(props) {
-  const { user, handleLogout } = props;
+function Navbar() {
+  const { user, handleLogout } = useContext(UserContext);
   const [dropped, setDropped] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -76,7 +77,7 @@ function Navbar(props) {
                 {/* <img src={searchLogo} alt="search" /> */}
                 <Search size={20} strokeWidth={1.5} />
               </div>
-              <div className="search-flex">Search</div>
+              <div className="search-flex mobile-search_text">Search</div>
             </Link>
             {/* </a> */}
           </div>
@@ -87,7 +88,9 @@ function Navbar(props) {
                 {/* <img src={plus} alt="" /> */}
                 <PlusCircle size={22} strokeWidth={1.5} />
               </div>
-              <div className="search">Publish a ride</div>
+              <div className="search-flex mobile-publish_text">
+                Publish a ride
+              </div>
             </Link>
             {/* </a> */}
           </div>

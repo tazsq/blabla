@@ -1,17 +1,24 @@
 "use client";
 
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../css/RidesList.css";
 import routeService from "../services/routeService";
 import Filter from "./Filter";
 import RideCard from "./RideCard";
 
-function RidesList({ user }) {
+function RidesList() {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
+  const { user } = useContext(useContext);
+  useEffect(() => {
+    if (user === null) {
+      navigate("/login", { replace: true });
+    }
+  }, [user, navigate]);
+  if (user === null) {
+    return null;
+  }
   const ridesUpper = location.state?.ridesUpper;
   const [rides, setRides] = useState(ridesUpper || []);
   const [loading, setLoading] = useState(true);

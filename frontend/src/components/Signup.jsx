@@ -1,5 +1,5 @@
 // import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import FormInput from "./FormInput.jsx";
 import { Button } from "semantic-ui-react";
 import ErrorMessage from "./ErrorMessage.jsx";
@@ -7,8 +7,9 @@ import SuccessMsg from "./SuccessMsg.jsx";
 import "../css/Login.css";
 import signupService from "../services/signup.js";
 import { Link } from "react-router-dom";
-function Signup(props) {
-  const { setUser } = props;
+import UserContext from "../contexts/UserContext.js";
+function Signup() {
+  const { setUser } = useContext(UserContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -112,6 +113,7 @@ function Signup(props) {
           </button>
         </div>
         <Link to="/">Log in?</Link>
+        <Link to="/payment-gateway">Link to new payment gateway i built!</Link>
       </form>
     </div>
   );

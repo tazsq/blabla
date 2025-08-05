@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import rightArrow from "../assets/right-arrow.png";
 import "../css/Sidebar.css";
 import { ChevronRight } from "lucide-react";
+import UserContext from "../contexts/UserContext";
 
-const Sidebar = ({ isOpen, user }) => {
+const Sidebar = ({ isOpen }) => {
+  const { user, handleLogout } = useContext(UserContext);
   return (
     <div className={`sidebar-container ${isOpen ? "open" : ""}`}>
       <div className="sidebar-list-container">
@@ -24,16 +26,30 @@ const Sidebar = ({ isOpen, user }) => {
           </li>
 
           <li>
-            <a href={user === null ? "/login" : "/dashboard"}>
-              <p>{user === null ? "Login" : "Dashboard"}</p>
-              <ChevronRight size={18} strokeWidth={2} />
-            </a>
+            {user == null ? (
+              <a href="/login">
+                <p>Login</p>
+                <ChevronRight size={18} strokeWidth={2} />
+              </a>
+            ) : (
+              <a href="/dashboard">
+                <p>Dashboard</p>
+                <ChevronRight size={18} strokeWidth={2} />
+              </a>
+            )}
           </li>
           <li>
-            <a href={user === null ? "/signup" : "/logout"}>
-              <p>{user === null ? "Sign up" : "Log out"}</p>
-              <ChevronRight size={18} strokeWidth={2} />
-            </a>
+            {user == null ? (
+              <a href="/signup">
+                <p>Sign up</p>
+                <ChevronRight size={18} strokeWidth={2} />
+              </a>
+            ) : (
+              <a onClick={handleLogout}>
+                <p>Log out</p>
+                <ChevronRight size={18} strokeWidth={2} />
+              </a>
+            )}
           </li>
         </ul>
       </div>

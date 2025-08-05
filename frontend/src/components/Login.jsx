@@ -1,19 +1,20 @@
 // import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import FormInput from "./FormInput.jsx";
-import { Button, Label } from "semantic-ui-react";
 import ErrorMessage from "./ErrorMessage.jsx";
 import "../css/Login.css";
 import loginService from "../services/login.js";
-import { Link, Navigate } from "react-router-dom";
-function Login(props) {
-  const { setUser } = props;
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext.js";
+function Login() {
+  const { user, setUser, handleLogout } = useContext(UserContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     setUser(null); // clear token on initial mount (dev only)
     // window.localStorage.removeItem('loggedInUser');
@@ -49,6 +50,7 @@ function Login(props) {
         window.localStorage.setItem("loggedInUser", JSON.stringify(response));
         setError("");
         setUser(response);
+        navigate("/find", { replace: true });
         console.log(response.token);
         setName("");
         setUsername("");
@@ -133,7 +135,5 @@ function Login(props) {
     </div>
   );
 }
-Login.propTypes = {
-  setUser: PropTypes.func.isRequired,
-};
+
 export default Login;

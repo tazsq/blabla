@@ -184,6 +184,10 @@
   gap: 1.8vw;
 }
 @media (width< 769px) {
+  .mobile-publish_text,
+  .mobile-search_text {
+    display: none;
+  }
   .navbar-css {
     position: relative;
     padding-left: 3vw;
@@ -200,9 +204,7 @@
   .profile-wrapper {
     display: none;
   }
-  .nav-search .search-flex {
-    display: none;
-  }
+
   .new-logo-cont h2 {
     display: none;
   }

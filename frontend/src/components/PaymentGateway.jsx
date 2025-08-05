@@ -1,16 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router";
 import fourDots from "../assets/4-dots.svg";
 import cardIcon from "../assets/card-nn.svg";
 import edit from "../assets/edit.svg";
 import solanaIcon from "../assets/solana.svg";
+import UserContext from "../contexts/UserContext.js";
 import "../css/PaymentGateway.css";
 import useTimer from "../hooks/useTimer.js";
-import LearnTs from "../components/LearnTs";
-function Input() {
+function PaymentGateway() {
   const timer = useTimer(10);
+  let navigate = useNavigate();
+  const { user, setUser, handleLogout } = useContext(UserContext);
+  useEffect(() => {
+    if (user === null) {
+      navigate("/login", { replace: true });
+    }
+  }, [user, navigate]);
+  if (user === null) {
+    return null;
+  }
   return (
     <div className="pay-gate-wrapper">
-      <LearnTs />
       <div className="payment-gateway">
         <form className="payment-gateway-left">
           <button
@@ -137,4 +147,4 @@ function Input() {
   );
 }
 
-export default Input;
+export default PaymentGateway;

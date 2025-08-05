@@ -1,16 +1,26 @@
-import { useEffect } from "react";
-import "../css/FindaRide.css";
-import FormInput from "./FormInput";
-import circle from "../assets/circle.png";
-import calender from "../assets/calender.png";
-import userpng from "../assets/user.png";
-import { useState } from "react";
-import ErrorMessage from "./ErrorMessage";
 import PropTypes from "prop-types";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import calender from "../assets/calender.png";
+import circle from "../assets/circle.png";
+import userpng from "../assets/user.png";
+import UserContext from "../contexts/UserContext";
+import "../css/FindaRide.css";
 import routeService from "../services/routeService";
+import ErrorMessage from "./ErrorMessage";
+import FormInput from "./FormInput";
 import SuccessMsg from "./SuccessMsg";
-function CreateaRide(props) {
-  const { user } = props;
+function CreateaRide() {
+  const { user } = useContext(UserContext);
+  let navigate = useNavigate();
+  useEffect(() => {
+    if (user === null) {
+      navigate("/login", { replace: true });
+    }
+  }, [user, navigate]);
+  if (user === null) {
+    return null;
+  }
   const [formData, setFormData] = useState({
     from: "",
     to: "",
@@ -28,17 +38,15 @@ function CreateaRide(props) {
     const { name, value } = e.target;
     setError("");
     setSuccessmsg("");
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+
     if (name === "passengerCapacity" && (value > 8 || value < 1)) {
       setError("Passengers should be less than equal to 8 and greater than 0");
-      setFormData({
-        ...formData,
-        [name]: formData.passengerCapacity,
-      });
     } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+      setError("");
     }
   };
   const handleSubmit = async (e) => {
@@ -47,7 +55,8 @@ function CreateaRide(props) {
       if (
         !formData.date ||
         !formData.from ||
-        !formData.passengerCapacity ||
+        formData.passengerCapacity > 8 ||
+        formData.passengerCapacity < 1 ||
         !formData.to ||
         !formData.startTime ||
         !formData.endTime
@@ -159,7 +168,5 @@ function CreateaRide(props) {
     </div>
   );
 }
-CreateaRide.propTypes = {
-  user: PropTypes.object.isRequired,
-};
+
 export default CreateaRide;
