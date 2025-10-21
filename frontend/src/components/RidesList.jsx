@@ -6,11 +6,12 @@ import "../css/RidesList.css";
 import routeService from "../services/routeService";
 import Filter from "./Filter";
 import RideCard from "./RideCard";
+import UserContext from "../contexts/UserContext";
 
 function RidesList() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useContext(useContext);
+  const { user } = useContext(UserContext);
   useEffect(() => {
     if (user === null) {
       navigate("/login", { replace: true });

@@ -1,7 +1,5 @@
 const User = require("../models/user.js");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const config = require("../utils/config.js");
 const usersController = {
   login: async (request, response, next) => {
     try {
@@ -18,18 +16,18 @@ const usersController = {
         });
       }
       console.log(user);
-      const userForToken = {
-        username: user.username,
-        id: user._id,
-      };
+      // const userForToken = {
+      //   username: user.username,
+      //   id: user._id,
+      // };
 
-      const token = jwt.sign(userForToken, config.SECRET, {
-        expiresIn: 60 * 60,
-      });
-
+      // const token = jwt.sign(userForToken, config.SECRET, {
+      //   expiresIn: 60 * 60,
+      // });
+      const accessToken = user.generateAccessToken();
       return response
         .status(200)
-        .send({ token, username: user.username, name: user.name });
+        .send({ accessToken, username: user.username, name: user.name });
     } catch (err) {
       next(err);
     }
@@ -74,7 +72,7 @@ const usersController = {
       next(err);
     }
   },
-  createUser: async (req, resp, next) => {
+  registerUser: async (req, resp, next) => {
     try {
       console.log(req.body);
       const { name, username, password } = req.body;

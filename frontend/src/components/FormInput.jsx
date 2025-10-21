@@ -12,7 +12,7 @@ function FormInput({
   label,
   className,
 }) {
-  const id = placeholder.toLowerCase().replace(/\s/g, "-");
+  const id = placeholder?.toLowerCase().replace(/\s/g, "-");
   return (
     <div className={`find-a-ride-input ${className}`}>
       <div className="find-a-ride-input-icon">

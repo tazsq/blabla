@@ -210,7 +210,7 @@ const routesController = {
         return res.status(404).json({ error: "Route not found" });
       }
       user.createdRoutes = user.createdRoutes.filter(
-        (r) => r.toString() !== id
+        (r) => r.toString() !== id,
       );
       await user.save();
       console.log("Updated user:", user);

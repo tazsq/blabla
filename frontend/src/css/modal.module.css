@@ -1,0 +1,59 @@
+@import url(global.css);
+
+.modalContainer {
+  height: 400px;
+  width: 600px;
+  background-color: red;
+  border: 1px dashed black;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  padding: 50px 0;
+}
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+}
+
+.searchInput {
+  width: 400px;
+  height: 3rem;
+  text-align: center;
+  outline: none;
+  border: none;
+  caret-color: black;
+  border-radius: 0.5rem;
+  padding-inline-start: 20px;
+  padding-inline-end: 10px;
+}
+.dropdownListItem {
+  padding: 8px;
+  cursor: pointer;
+  background-color: white;
+  width: 100%;
+}
+.dropdownListItem:hover {
+  background-color: blue;
+}
+.placesList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 1rem;
+  overflow: hidden;
+  height: 150px;
+  width: 400px;
+  background-color: white;
+}
+.spinnerWrapper {
+  flex: 1; /* take up full space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

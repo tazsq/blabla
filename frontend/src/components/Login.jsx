@@ -1,14 +1,14 @@
 // import React from "react";
 import { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 import FormInput from "./FormInput.jsx";
 import ErrorMessage from "./ErrorMessage.jsx";
 import "../css/Login.css";
 import loginService from "../services/login.js";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext.js";
+import Spinner from "./Spinner.jsx";
 function Login() {
-  const { user, setUser, handleLogout } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -122,7 +122,8 @@ function Login() {
           >
             {loading ? (
               <>
-                <span className="loader"></span>
+                <Spinner />
+                {/* <span className="loader"></span> */}
               </>
             ) : (
               "Log in"

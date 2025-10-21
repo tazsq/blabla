@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-
+const jwt = require("jsonwebtoken");
+const config = require("../utils/config.js");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -23,5 +24,27 @@ userSchema.set("toJSON", {
     delete returnedObject.__v;
   },
 });
-
+userSchema.methods.generateAccessToken = function () {
+  return jwt.sign(
+    {
+      id: this._id,
+      username: this.username,
+    },
+    config.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: config.ACCESS_TOKEN_EXPIRY,
+    }
+  );
+};
+userSchema.methods.generateRefreshToken = function () {
+  return jwt.sign(
+    {
+      id: this._id,
+    },
+    config.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: config.REFRESH_TOKEN_EXPIRY,
+    }
+  );
+};
 module.exports = mongoose.model("User", userSchema);

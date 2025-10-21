@@ -6,3 +6,4 @@ date: "",
 passengersRequired: 1,
 availability: "availableOnly",
 }
+make useAuthenticate hook or separate the logic of authencating from the pure components

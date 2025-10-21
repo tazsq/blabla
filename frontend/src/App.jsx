@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  Link,
   Navigate,
   Route,
   BrowserRouter as Router,
@@ -11,16 +10,17 @@ import "./App.css";
 import CreateaRide from "./components/CreateaRide";
 import Details from "./components/Details";
 import FindaRide from "./components/FindaRide";
+import Layout from "./components/Layout";
 import Login from "./components/Login";
-import Navbar from "./components/Navbar";
+import Modal from "./components/Modal";
 import PaymentGateway from "./components/PaymentGateway";
 import RidesList from "./components/RidesList";
 import Signup from "./components/Signup";
 import UserContext from "./contexts/UserContext";
 import loginService from "./services/login";
-import Layout from "./components/Layout";
 function App() {
   const [user, setUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem("loggedInUser");
@@ -59,25 +59,18 @@ function App() {
         <div className="app">
           <Routes>
             <Route path="/" element={<Layout />}>
-              {/* <Navbar user={user} handleLogout={handleLogout} /> */}
-              {/* 
-              {user === null ? (
-                <> */}
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/details" element={<Details />} />
               <Route path="/payment-gateway" element={<PaymentGateway />} />
-              {/* </> */}
-              {/* ) : ( */}
-              {/* <> */}
               <Route path="/find" element={<FindaRide />} />
               <Route path="/create" element={<CreateaRide />} />
               <Route path="/rides" element={<RidesList />} />
               <Route path="/" element={<Navigate to="/find" />} />
-              {/* </> */}
-              {/* )} */}
             </Route>
           </Routes>
+          <button onClick={() => setShowModal(true)}>modal here</button>
+          <Modal setShowModal={setShowModal} showModal={showModal} />
           {/* <RidesList user={user} /> */}
           {/* <Filter /> */}
           {/* <Calendar /> */}
