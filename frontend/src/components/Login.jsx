@@ -71,7 +71,7 @@ function Login() {
 
   return (
     <div className={"login-container"}>
-      <div className={"login-header"}>
+      <div className={"login-header "}>
         <h1>Login</h1>
       </div>
       <form className={"login-input-block"} onSubmit={handleLogin}>

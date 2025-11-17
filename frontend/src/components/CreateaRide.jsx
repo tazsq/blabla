@@ -90,7 +90,7 @@ function CreateaRide() {
   };
   return (
     <div className="find-a-ride">
-      <div className="find-a-ride-header">
+      <div className="find-a-ride-header ">
         <h1>Create a ride</h1>
       </div>
       <div className="find-a-ride-container">
