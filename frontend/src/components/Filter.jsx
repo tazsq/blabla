@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dropdown, Icon } from "semantic-ui-react";
+// import { Dropdown, Icon } from "semantic-ui-react";
 
 function Filter({ onChange }) {
   const [filters, setFilters] = useState({
@@ -36,7 +36,7 @@ function Filter({ onChange }) {
 
   return (
     <div style={{ marginBottom: 20 }}>
-      <Dropdown
+      {/* <Dropdown
         placeholder="Filter Rides"
         button
         className="icon"
@@ -49,7 +49,7 @@ function Filter({ onChange }) {
         options={options}
         onChange={handleDropdownChange}
         value={filters.tags}
-      />
+      /> */}
       <input
         type="date"
         onChange={handleDateChange}

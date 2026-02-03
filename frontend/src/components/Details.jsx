@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import flashIcon from "../assets/flash.png";
-import UserContext from "../contexts/UserContext";
 import "../css/Details.css";
 function formatDate(dateString) {
   // Create a Date object. Adding 'T00:00:00' prevents timezone issues.
@@ -19,15 +18,6 @@ function formatDate(dateString) {
 }
 function Details() {
   let navigate = useNavigate();
-  const { user } = useContext(UserContext);
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
-  if (user === null) {
-    return null;
-  }
   const data = {
     from: "kota",
     to: "mumbai",

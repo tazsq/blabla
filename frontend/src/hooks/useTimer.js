@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./timer.css";
 function useTimer(time) {
   const [timer, setTimer] = useState(time);

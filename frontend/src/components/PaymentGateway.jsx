@@ -4,21 +4,20 @@ import fourDots from "../assets/4-dots.svg";
 import cardIcon from "../assets/card-nn.svg";
 import edit from "../assets/edit.svg";
 import solanaIcon from "../assets/solana.svg";
-import UserContext from "../contexts/UserContext.js";
 import "../css/PaymentGateway.css";
 import useTimer from "../hooks/useTimer.js";
 function PaymentGateway() {
   const timer = useTimer(10);
-  let navigate = useNavigate();
-  const { user, setUser, handleLogout } = useContext(UserContext);
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
-  if (user === null) {
-    return null;
-  }
+  // let navigate = useNavigate();
+  // const { user, setUser, handleLogout } = useContext(UserContext);
+  // useEffect(() => {
+  //   if (user === null) {
+  //     navigate("/login", { replace: true });
+  //   }
+  // }, [user, navigate]);
+  // if (user === null) {
+  //   return null;
+  // }
   return (
     <div className="pay-gate-wrapper">
       <div className="payment-gateway">

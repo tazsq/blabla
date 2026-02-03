@@ -1,25 +1,20 @@
 // import React from "react";
-import { useState, useEffect, useContext } from "react";
-import FormInput from "./FormInput.jsx";
-import ErrorMessage from "./ErrorMessage.jsx";
+import { Spinner } from "@/components/ui/spinner";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 import "../css/Login.css";
 import loginService from "../services/login.js";
-import { Link, useNavigate } from "react-router-dom";
-import UserContext from "../contexts/UserContext.js";
-import Spinner from "./Spinner.jsx";
+import ErrorMessage from "./ErrorMessage.jsx";
+import FormInput from "./FormInput.jsx";
 function Login() {
-  const { setUser } = useContext(UserContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  useEffect(() => {
-    setUser(null); // clear token on initial mount (dev only)
-    // window.localStorage.removeItem('loggedInUser');
-  }, []);
-  console.log(username, password);
+  const { user, setUser, handleLogout } = useContext(AuthContext);
   const handleNameChange = (e) => {
     if (error) setError("");
     setName(e.target.value);
@@ -42,16 +37,21 @@ function Login() {
     setLoading(true); // Start loading immediately
 
     try {
-      const credentials = { name, username, password };
+      const credentials = {
+        name: name.trim(),
+        username: username.trim().toLowerCase(),
+        password,
+      };
+      console.log(credentials, "credentials");
       const response = await loginService.login(credentials);
-      // console.log(response);
-      if (response.token) {
-        loginService.setToken(response.token);
+      console.log(response, "response");
+      if (response.accessToken) {
+        loginService.setToken(response.accessToken);
         window.localStorage.setItem("loggedInUser", JSON.stringify(response));
         setError("");
         setUser(response);
         navigate("/find", { replace: true });
-        console.log(response.token);
+        console.log(response.accessToken);
         setName("");
         setUsername("");
         setPassword("");
@@ -70,69 +70,84 @@ function Login() {
   };
 
   return (
-    <div className={"login-container"}>
-      <div className={"login-header "}>
-        <h1>Login</h1>
-      </div>
-      <form className={"login-input-block"} onSubmit={handleLogin}>
-        {error ? <ErrorMessage error={error} /> : null}
-        <FormInput
-          placeholder={"Enter your name"}
-          className={"login-input"}
-          value={name}
-          handleChange={handleNameChange}
-          disabled={loading}
-          label={true}
-        />
-        <FormInput
-          placeholder={"Enter you username"}
-          className={"login-input"}
-          value={username}
-          handleChange={handleUsernameChange}
-          disabled={loading}
-          required={true}
-          label={true}
-        />
-        <FormInput
-          placeholder={"Enter your password"}
-          className={"login-input"}
-          value={password}
-          type="password"
-          handleChange={handlePasswordChange}
-          disabled={loading}
-          required={true}
-          label={true}
-        />
-        {/* <Loader size="medium">Loading</Loader> */}
-        {/* <div className={"login-submit"}>
-          <Button
-            loading={loading}
-            secondary
-            className={"login-submit-button"}
-            disabled={loading}
-          >
-            Login
-          </Button>
-        </div> */}
-        <div className="submit-container login-btn">
-          <button
-            type="submit"
-            className="find-a-ride-submit login-btn-inside"
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <Spinner />
-                {/* <span className="loader"></span> */}
-              </>
-            ) : (
-              "Log in"
-            )}
-          </button>
+    <div className="flex justify-center items-center my-8 ">
+      <div className="flex  flex-col items-center justify-center min-h-[75vh] min-w-[60vw] max-w-80 gap-8 p-8 bg-white shadow-xl backdrop-blur-md rounded-3xl">
+        {/* Header */}
+        <div className="flex items-center justify-center">
+          <h1 className="text-[32px] font-bold text-gray-800">Login</h1>
         </div>
-        <Link to="/signup">Sign up?</Link>
-        <Link to="/payment-gateway">Link to new payment gateway i built!</Link>
-      </form>
+
+        {/* Form */}
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col items-center  gap-4 w-full max-w-80"
+        >
+          {error && <ErrorMessage error={error} />}
+
+          <FormInput
+            placeholder="Enter your name"
+            value={name}
+            handleChange={handleNameChange}
+            disabled={loading}
+            label
+            className="bg-gray-100 rounded-2xl focus-within:border-[3px] focus-within:border-cyan-400"
+          />
+
+          <FormInput
+            placeholder="Enter your username"
+            value={username}
+            handleChange={handleUsernameChange}
+            disabled={loading}
+            required
+            label
+            className="bg-gray-100 rounded-2xl focus-within:border-[3px] focus-within:border-cyan-400"
+          />
+
+          <FormInput
+            placeholder="Enter your password"
+            type="password"
+            value={password}
+            handleChange={handlePasswordChange}
+            disabled={loading}
+            required
+            label
+            className="bg-gray-100 rounded-2xl focus-within:border-[3px] focus-within:border-cyan-400"
+          />
+
+          {/* Submit */}
+          <div className="mt-4 flex items-center justify-center w-[93px] h-[48px] rounded-2xl">
+            <button
+              type="submit"
+              disabled={loading}
+              className="
+              flex items-center justify-center
+              w-[93px] h-[48px]
+              rounded-2xl
+              bg-gradient-to-br from-cyan-400 to-blue-500
+              text-white font-semibold
+              shadow-md
+              transition-all duration-200
+              hover:from-blue-500 hover:to-cyan-400
+              hover:shadow-lg hover:-translate-y-0.5
+              disabled:opacity-70 disabled:cursor-not-allowed
+            "
+            >
+              {loading ? <Spinner className="size-8" /> : "Log in"}
+            </button>
+          </div>
+
+          {/* Links */}
+          <Link to="/signup" className="text-sm text-blue-600 hover:underline">
+            Sign up?
+          </Link>
+          <Link
+            to="/payment-gateway"
+            className="text-sm text-blue-600 hover:underline"
+          >
+            Link to new payment gateway i built!
+          </Link>
+        </form>
+      </div>
     </div>
   );
 }

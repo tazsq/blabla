@@ -131,11 +131,11 @@
 /* Desktop-specific utility classes */
 @media (min-width: 1023px) {
   .desktop-only {
-    display: block !important;
+    display: block ;
   }
 
   .mobile-only {
-    display: none !important;
+    display: none ;
   }
 
   /* Desktop-specific grid variations */

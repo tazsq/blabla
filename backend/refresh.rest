@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/auth/refresh
+Content-Type: application/json
+Set-Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTRiOWRjOGM2NDU5N2ZhNDk5ZWY3MSIsImlhdCI6MTc3MDE0Mzk0MiwiZXhwIjoxNzcwNzQ4NzQyfQ.1N9o17H-wqIX_1eI31pdY6Zdk6e-ep-eOSYZwJ_5C-0; Max-Age=604800; Path=/; Expires=Tue, 10 Feb 2026 18:39:02 GMT; HttpOnly
+
+{
+  
+}

@@ -3,7 +3,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font: 600 16px / 20px "Roboto", sans-serif;
 }
 .new-logo {
   height: 1.2rem;
@@ -15,7 +14,6 @@
   /* justify-content: center; */
   flex: 1;
   gap: 0.8rem;
-  margin-left: 1.1rem;
 }
 .new-logo-cont > h2 {
   margin: 0;
@@ -24,14 +22,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-height: 75px;
-  padding: 10px 10px;
+  padding: 10px 80px;
   background-color: #ffffff;
   width: 100vw;
   max-width: 100%;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1;
 }
 
 /* .logo {
@@ -58,7 +55,6 @@
 .nav-search a {
   text-decoration: none;
   /* color: #002760; */
-  font-size: 30px;
 }
 
 .nav-logo {
@@ -114,7 +110,10 @@
   max-height: 500px; /* enough to show all content */
   opacity: 1;
   overflow: hidden;
-  transition: transform 0.3s ease, max-height 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    max-height 0.3s ease,
+    opacity 0.3s ease;
   z-index: 100;
   transform: translateY(0);
 }

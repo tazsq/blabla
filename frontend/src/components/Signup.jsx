@@ -1,15 +1,15 @@
 // import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import FormInput from "./FormInput.jsx";
-import { Button } from "semantic-ui-react";
-import ErrorMessage from "./ErrorMessage.jsx";
-import SuccessMsg from "./SuccessMsg.jsx";
+// import { Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext.jsx";
 import "../css/Login.css";
 import signupService from "../services/signup.js";
-import { Link } from "react-router-dom";
-import UserContext from "../contexts/UserContext.js";
+import ErrorMessage from "./ErrorMessage.jsx";
+import SuccessMsg from "./SuccessMsg.jsx";
 function Signup() {
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +46,7 @@ function Signup() {
       const credentials = { name, username, password };
       if (username.includes(" ") || password.length < 4) {
         setError(
-          "Username must not contain spaces and password must be at least 6 characters"
+          "Username must not contain spaces and password must be at least 6 characters",
         );
         setLoading(false);
         return;
@@ -73,47 +73,82 @@ function Signup() {
   };
 
   return (
-    <div className={"login-container"}>
-      <div className={"login-header"}>
-        <h1>Signup</h1>
+    <div className="flex flex-col items-center justify-center min-h-[75vh] min-w-[60vw] gap-16 p-8">
+      {/* Header */}
+      <div className="flex items-center justify-center mb-14">
+        <h1 className="text-[32px] font-bold text-gray-800">Signup</h1>
       </div>
-      <form className={"login-input-block"} onSubmit={handleSignup}>
-        {error ? <ErrorMessage error={error} /> : null}
+
+      {/* Form */}
+      <form
+        onSubmit={handleSignup}
+        className="flex flex-col items-center gap-4 w-full max-w-[320px]"
+      >
+        {error && <ErrorMessage error={error} />}
         {successmsg && <SuccessMsg msg={successmsg} />}
+
         <FormInput
-          placeholder={"Enter your name"}
-          className={"login-input"}
+          placeholder="Enter your name"
           value={name}
           handleChange={handleNameChange}
           disabled={loading || disabled}
-          label={true}
+          label
+          className="bg-gray-100 rounded-2xl focus-within:border-[3px] focus-within:border-cyan-400"
         />
+
         <FormInput
-          placeholder={"Enter you username"}
-          className={"login-input"}
+          placeholder="Enter your username"
           value={username}
           handleChange={handleUsernameChange}
           disabled={loading || disabled}
-          required={true}
-          label={true}
+          required
+          label
+          className="bg-gray-100 rounded-2xl focus-within:border-[3px] focus-within:border-cyan-400"
         />
+
         <FormInput
-          placeholder={"Enter your password"}
-          className={"login-input"}
-          value={password}
+          placeholder="Enter your password"
           type="password"
+          value={password}
           handleChange={handlePasswordChange}
           disabled={loading || disabled}
-          required={true}
-          label={true}
+          required
+          label
+          className="bg-gray-100 rounded-2xl focus-within:border-[3px] focus-within:border-cyan-400"
         />
-        <div className="submit-container login-btn">
-          <button type="submit" className="find-a-ride-submit login-btn-inside">
+
+        {/* Submit */}
+        <div className="mt-4 flex items-center justify-center w-[93px] h-[48px] rounded-2xl">
+          <button
+            type="submit"
+            disabled={loading || disabled}
+            className="
+              flex items-center justify-center
+              w-[93px] h-[48px]
+              rounded-2xl
+              bg-gradient-to-br from-cyan-400 to-blue-500
+              text-white font-semibold
+              shadow-md
+              transition-all duration-200
+              hover:from-blue-500 hover:to-cyan-400
+              hover:shadow-lg hover:-translate-y-0.5
+              disabled:opacity-70 disabled:cursor-not-allowed
+            "
+          >
             Sign up
           </button>
         </div>
-        <Link to="/">Log in?</Link>
-        <Link to="/payment-gateway">Link to new payment gateway i built!</Link>
+
+        {/* Links */}
+        <Link to="/login" className="text-sm text-blue-600 hover:underline">
+          Log in?
+        </Link>
+        <Link
+          to="/payment-gateway"
+          className="text-sm text-blue-600 hover:underline"
+        >
+          Link to new payment gateway i built!
+        </Link>
       </form>
     </div>
   );

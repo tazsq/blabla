@@ -1,37 +1,6 @@
 const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
 const usersController = {
-  login: async (request, response, next) => {
-    try {
-      const { username, password } = request.body;
-      const user = await User.findOne({ username });
-      const passwordCorrect =
-        user === null
-          ? false
-          : await bcrypt.compare(password, user.passwordHash);
-
-      if (!(user && passwordCorrect)) {
-        return response.status(401).json({
-          error: "invalid username or password",
-        });
-      }
-      console.log(user);
-      // const userForToken = {
-      //   username: user.username,
-      //   id: user._id,
-      // };
-
-      // const token = jwt.sign(userForToken, config.SECRET, {
-      //   expiresIn: 60 * 60,
-      // });
-      const accessToken = user.generateAccessToken();
-      return response
-        .status(200)
-        .send({ accessToken, username: user.username, name: user.name });
-    } catch (err) {
-      next(err);
-    }
-  },
   deleteAllUsers: async (req, res, next) => {
     try {
       const users = await User.deleteMany({});

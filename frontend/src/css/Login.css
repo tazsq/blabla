@@ -9,7 +9,6 @@
 
 /* Container */
 .login-container {
-  font: var(--find-a-ride-header-style);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,14 +58,14 @@
   width: 100%;
 }
 .login-btn {
-  border-radius: 16px !important;
-  height: 48px !important;
-  width: 93px !important;
+  border-radius: 16px;
+  height: 48px;
+  width: 93px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* line-height: 24px !important;
-  letter-spacing: 1px !important; */
+  /* line-height: 24px  ;
+  letter-spacing: 1px  ; */
 }
 .loader {
   border: 2px solid #fefefe;
@@ -88,9 +87,9 @@
 }
 
 .login-btn-inside {
-  border-radius: 16px !important;
-  height: 48px !important;
-  width: 93px !important;
+  border-radius: 16px;
+  height: 48px;
+  width: 93px;
 }
 .login-input-block > div {
   /* border: 2px solid black; Your custom hover effect */
@@ -123,9 +122,9 @@
   transform: translateY(-2px);
 }
 .login-input {
-  background-color: rgba(240, 240, 240, 0.986) !important;
-  /* border: 2px solid #00bcd4 !important; */
+  background-color: rgba(240, 240, 240, 0.986);
+  /* border: 2px solid #00bcd4  ; */
 }
 .login-input:has(input:focus) {
-  border: 3px solid #00bcd4 !important;
+  border: 3px solid #00bcd4;
 }

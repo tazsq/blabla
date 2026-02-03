@@ -1,83 +1,63 @@
-import { useEffect, useState } from "react";
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
+import { useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 
+import AuthGuard from "./components/AuthGuard";
 import CreateaRide from "./components/CreateaRide";
 import Details from "./components/Details";
 import FindaRide from "./components/FindaRide";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
-import Modal from "./components/Modal";
 import PaymentGateway from "./components/PaymentGateway";
 import RidesList from "./components/RidesList";
 import Signup from "./components/Signup";
-import UserContext from "./contexts/UserContext";
-import loginService from "./services/login";
+import Home from "./pages/Home";
 function App() {
-  const [user, setUser] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    const loggedInUser = window.localStorage.getItem("loggedInUser");
-    if (loggedInUser) {
-      const user = JSON.parse(loggedInUser);
-      console.log(user);
-      //verify through backend endpoint if token expired or not
-
-      try {
-        const payload = JSON.parse(atob(user.token.split(".")[1]));
-        console.log(payload, "-----payload");
-        const now = Date.now();
-        console.log(payload.exp, "---------payload.exp");
-        if (payload.exp * 1000 < now) {
-          // Token expired
-          handleLogout(); // Clear localStorage and redirect
-        } else {
-          // Token valid → maybe setUser(), etc.
-          console.log("Token still valid");
-        }
-      } catch (err) {
-        console.log(err);
-        handleLogout(); // Malformed token
-      }
-      setUser(user);
-      loginService.setToken(user.token);
-    }
-  }, []);
-  const handleLogout = () => {
-    window.localStorage.removeItem("loggedInUser");
-    setUser(null);
-  };
   return (
-    <UserContext.Provider value={{ user, setUser, handleLogout }}>
-      <Router>
-        <div className="app">
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/details" element={<Details />} />
-              <Route path="/payment-gateway" element={<PaymentGateway />} />
-              <Route path="/find" element={<FindaRide />} />
-              <Route path="/create" element={<CreateaRide />} />
-              <Route path="/rides" element={<RidesList />} />
-              <Route path="/" element={<Navigate to="/find" />} />
-            </Route>
-          </Routes>
-          <button onClick={() => setShowModal(true)}>modal here</button>
-          <Modal setShowModal={setShowModal} showModal={showModal} />
-          {/* <RidesList user={user} /> */}
-          {/* <Filter /> */}
-          {/* <Calendar /> */}
-          {/* <Sidebar /> */}
-        </div>
-      </Router>
-    </UserContext.Provider>
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route
+              path="/login"
+              element={
+                <AuthGuard>
+                  <Login />
+                </AuthGuard>
+              }
+            />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/details"
+              element={
+                <AuthGuard>
+                  <Details />
+                </AuthGuard>
+              }
+            />
+            <Route path="/payment-gateway" element={<PaymentGateway />} />
+            <Route
+              path="/find"
+              element={
+                <AuthGuard>
+                  <FindaRide />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/create"
+              element={
+                <AuthGuard>
+                  <CreateaRide />
+                </AuthGuard>
+              }
+            />
+            <Route path="/rides" element={<RidesList />} />
+            <Route path="/" element={<Home />} />
+          </Route>
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

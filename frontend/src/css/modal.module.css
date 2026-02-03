@@ -1,24 +1,5 @@
 @import url(global.css);
 
-.modalContainer {
-  height: 400px;
-  width: 600px;
-  background-color: red;
-  border: 1px dashed black;
-  align-items: center;
-  justify-content: space-around;
-  display: flex;
-  flex-direction: column;
-  border-radius: 1rem;
-  padding: 50px 0;
-}
-.modalHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 400px;
-}
-
 .searchInput {
   width: 400px;
   height: 3rem;

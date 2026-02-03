@@ -1,23 +1,10 @@
 // UserGreeting.jsx
-import React, { useContext, useEffect } from "react";
-import { Menu, Image, Dropdown } from "semantic-ui-react";
-import UserContext from "../contexts/UserContext";
-import { useNavigate } from "react-router-dom";
+// import { Menu, Image, Dropdown } from "semantic-ui-react";
 
 function Greeting() {
-  const { user, handleLogout } = useContext(UserContext);
-  let navigate = useNavigate();
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
-  if (user === null) {
-    return null;
-  }
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "0.1rem" }}>
-      <Menu secondary style={{ padding: "0.8rem 1.5rem" }}>
+      {/* <Menu secondary style={{ padding: "0.8rem 1.5rem" }}>
         <Menu.Item header>Hi, {user.username}</Menu.Item>
 
         <Menu.Menu position="right">
@@ -55,7 +42,7 @@ function Greeting() {
             </Dropdown>
           )}
         </Menu.Menu>
-      </Menu>
+      </Menu> */}
     </div>
   );
 }

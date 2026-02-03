@@ -4,14 +4,12 @@ import { useNavigate } from "react-router-dom";
 import calender from "../assets/calender.png";
 import circle from "../assets/circle.png";
 import userpng from "../assets/user.png";
-import UserContext from "../contexts/UserContext";
 import "../css/FindaRide.css";
 import routeService from "../services/routeService";
 import ErrorMessage from "./ErrorMessage";
 import FormInput from "./FormInput";
 import SuccessMsg from "./SuccessMsg";
 function CreateaRide() {
-  const { user } = useContext(UserContext);
   let navigate = useNavigate();
   const [formData, setFormData] = useState({
     from: "",
@@ -26,14 +24,6 @@ function CreateaRide() {
   useEffect(() => {
     console.log(formData);
   }, [formData]);
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
-  if (user === null) {
-    return null;
-  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setError("");
@@ -89,12 +79,25 @@ function CreateaRide() {
     }
   };
   return (
-    <div className="find-a-ride">
-      <div className="find-a-ride-header ">
-        <h1>Create a ride</h1>
+    <div className="flex min-h-screen flex-col items-center">
+      {/* Header */}
+      <div className="flex justify-center">
+        <h1 className="px-5 py-5 text-2xl font-semibold">Create a ride</h1>
       </div>
-      <div className="find-a-ride-container">
-        <form action="" className="form">
+
+      {/* Form container */}
+      <div className="flex w-full justify-center">
+        <form
+          className="
+        flex w-full max-w-[100vw]
+        overflow-hidden rounded-2xl
+        bg-white/85 backdrop-blur-xl
+        shadow-[0_10px_30px_rgba(0,0,0,0.12)]
+        max-md:flex-col
+        mx-4
+        md:max-w-[75vw]
+      "
+        >
           <FormInput
             icon={circle}
             type="text"
@@ -103,7 +106,9 @@ function CreateaRide() {
             value={formData.from}
             handleChange={handleChange}
           />
-          <hr className="hr" />
+
+          <hr className="h-0.5 w-full border-border md:h-full md:w-0.5 md:bg-border" />
+
           <FormInput
             icon={circle}
             type="text"
@@ -112,59 +117,50 @@ function CreateaRide() {
             value={formData.to}
             handleChange={handleChange}
           />
-          <hr className="hr" />
+
+          <hr className="h-0.5 w-full border-border md:h-full md:w-0.5 md:bg-border" />
+
           <FormInput
             icon={calender}
             type="date"
             name="date"
-            placeholder="Today"
             value={formData.date}
             handleChange={handleChange}
           />
-          <hr className="hr" />
+
+          <hr className="h-0.5 w-full border-border md:h-full md:w-0.5 md:bg-border" />
+
           <FormInput
             icon={userpng}
             type="number"
+            name="passengerCapacity"
             placeholder="1 passenger"
             max="8"
-            name="passengerCapacity"
             value={formData.passengerCapacity}
             handleChange={handleChange}
           />
-          <hr className="hr" />
 
-          <FormInput
-            icon={userpng}
-            type="time"
-            placeholder="Enter start time"
-            name="startTime"
-            value={formData.startTime}
-            handleChange={handleChange}
-          />
-          <hr className="hr" />
-
-          <FormInput
-            icon={userpng}
-            type="time"
-            placeholder="Enter end time"
-            name="endTime"
-            value={formData.endTime}
-            handleChange={handleChange}
-          />
-
-          <div className="submit-container">
+          {/* Submit */}
+          <div className="flex w-full md:w-auto">
             <button
               type="submit"
               onClick={handleSubmit}
-              className="find-a-ride-submit"
+              className="
+            flex h-14 w-full items-center justify-center
+            bg-emerald-500 text-white font-medium
+            transition-colors duration-200
+            hover:bg-emerald-600
+            md:w-[200px]
+            md:h-full
+            md:rounded-none
+            rounded-b-xl
+          "
             >
               Create
             </button>
           </div>
         </form>
       </div>
-      {error !== "" ? <ErrorMessage error={error} /> : null}
-      {successmsg !== "" ? <SuccessMsg msg={successmsg} /> : null}
     </div>
   );
 }

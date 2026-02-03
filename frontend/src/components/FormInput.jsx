@@ -14,39 +14,52 @@ function FormInput({
 }) {
   const id = placeholder?.toLowerCase().replace(/\s/g, "-");
   return (
-    <div className={`find-a-ride-input ${className}`}>
-      <div className="find-a-ride-input-icon">
-        {icon ? <img src={icon} alt="" height={25} width={25} /> : null}
-        {/* <img src={icon} alt="" height={25} width={25} /> */}
-      </div>
+    <div
+      className={`
+        flex w-full items-center gap-2
+        rounded-2xl p-2
+        transition-colors
+        hover:bg-gray-100
+        m-0.5
+        
+        ${className}
+      `}
+    >
+      {/* Icon */}
+      {icon && (
+        <div className="flex items-center justify-center opacity-70">
+          <img src={icon} alt="" className="h-5 w-5" />
+        </div>
+      )}
+
+      {/* Label (optional, mostly for accessibility) */}
       {label && (
-        <label htmlFor={id} className="form-label">
+        <label htmlFor={id} className="sr-only">
           {label}
         </label>
       )}
-      {type === "number" ? (
-        <input
-          type={type}
-          placeholder={placeholder}
-          max="8"
-          min="0"
-          name={name}
-          onChange={handleChange}
-          value={value}
-          disabled={disabled}
-          required={required}
-        />
-      ) : (
-        <input
-          type={type}
-          placeholder={placeholder}
-          onChange={handleChange}
-          value={value}
-          name={name}
-          disabled={disabled}
-          required={required}
-        />
-      )}
+
+      {/* Input */}
+      <input
+        id={id}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={handleChange}
+        disabled={disabled}
+        required={required}
+        min={type === "number" ? 0 : undefined}
+        max={type === "number" ? 8 : undefined}
+        className="
+          w-full bg-transparent
+          px-2 py-2
+          outline-none
+          placeholder:text-gray-400
+          disabled:cursor-not-allowed
+          disabled:opacity-60
+        "
+      />
     </div>
   );
 }

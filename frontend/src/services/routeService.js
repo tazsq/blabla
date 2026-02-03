@@ -26,7 +26,7 @@ async function bookRide(token, ride) {
     // console.log(resp);
     return resp;
   } catch (error) {
-    return err;
+    return error;
   }
 }
 export default { create, getAllRoutes, bookRide };

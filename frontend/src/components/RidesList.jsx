@@ -2,24 +2,16 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 import "../css/RidesList.css";
 import routeService from "../services/routeService";
 import Filter from "./Filter";
 import RideCard from "./RideCard";
-import UserContext from "../contexts/UserContext";
 
 function RidesList() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useContext(UserContext);
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login", { replace: true });
-    }
-  }, [user, navigate]);
-  if (user === null) {
-    return null;
-  }
+  const { user } = useContext(AuthContext);
   const ridesUpper = location.state?.ridesUpper;
   const [rides, setRides] = useState(ridesUpper || []);
   const [loading, setLoading] = useState(true);

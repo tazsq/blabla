@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Nunito Sans", sans-serif;
 }
 .logout-timer {
   padding: 0 0.3rem;
@@ -14,7 +13,7 @@
   font-weight: 600;
 }
 .last-input-container {
-  padding-bottom: 3.3rem !important;
+  padding-bottom: 3.3rem;
 }
 .pay-gate-wrapper {
   display: flex;
