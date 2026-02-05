@@ -8,6 +8,7 @@ const routesRouter = require("./routes/routesRouter.js");
 const authRouter = require("./routes/authRouter.js");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 mongoose
   .connect(config.MONGODB_URI)
   .then(() => {
@@ -30,6 +31,9 @@ app.use(middleware.tokenExtractor);
 app.use("/api/routes", routesRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("dist", "index.html"));
+});
 // handler of requests with unknown endpoint
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
