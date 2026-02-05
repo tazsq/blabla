@@ -27,7 +27,7 @@ const routesController = {
       if (!req.token) {
         return res.status(401).json({ error: "token not provided" });
       }
-      const decodedToken = jwt.verify(req.token, config.SECRET);
+      const decodedToken = jwt.verify(req.token, config.ACCESS_TOKEN_SECRET);
       console.log(decodedToken);
       if (!decodedToken.id) {
         return res.status(401).json({ error: "token invalid" });
@@ -210,7 +210,7 @@ const routesController = {
         return res.status(404).json({ error: "Route not found" });
       }
       user.createdRoutes = user.createdRoutes.filter(
-        (r) => r.toString() !== id
+        (r) => r.toString() !== id,
       );
       await user.save();
       console.log("Updated user:", user);
@@ -242,7 +242,7 @@ const routesController = {
       if (!req.token) {
         return res.status(401).json({ error: "token not provided" });
       }
-      const decodedToken = jwt.verify(req.token, config.SECRET);
+      const decodedToken = jwt.verify(req.token, config.ACCESS_TOKEN_SECRET);
       console.log(decodedToken);
       if (!decodedToken.id) {
         return res.status(401).json({ error: "token invalid" });

@@ -54,11 +54,11 @@ function RidesList() {
     // Handle booking logic here
     console.log("Booking ride:", ride);
     alert(`Booking ride from ${ride.from} to ${ride.to}`);
-    const resp = await routeService.bookRide(user.token, ride);
+    const resp = await routeService.bookRide(user.accessToken, ride);
     console.log(
       rides.map((r) => {
         return r.id === resp.data.savedRoute.id ? resp.data.savedRoute : r;
-      })
+      }),
     );
     // setRides(
     //   rides.map((r) => {

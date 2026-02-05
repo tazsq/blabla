@@ -8,14 +8,13 @@ import "../css/Login.css";
 import signupService from "../services/signup.js";
 import ErrorMessage from "./ErrorMessage.jsx";
 import SuccessMsg from "./SuccessMsg.jsx";
+import { toast } from "sonner";
 function Signup() {
   const { setUser } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [successmsg, setSuccessmsg] = useState("");
   const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     setUser(null);
@@ -24,16 +23,13 @@ function Signup() {
   }, []);
 
   const handleNameChange = (e) => {
-    if (error) setError("");
     setName(e.target.value);
   };
   const handleUsernameChange = (e) => {
-    if (error) setError("");
     const value = e.target.value.replace(/\s/g, "");
     setUsername(value);
   };
   const handlePasswordChange = (e) => {
-    if (error) setError("");
     const value = e.target.value.replace(/\s/g, "");
     setPassword(value);
   };
@@ -45,7 +41,7 @@ function Signup() {
     try {
       const credentials = { name, username, password };
       if (username.includes(" ") || password.length < 4) {
-        setError(
+        toast.error(
           "Username must not contain spaces and password must be at least 6 characters",
         );
         setLoading(false);
@@ -53,19 +49,18 @@ function Signup() {
       }
       console.log(username);
       const response = await signupService.signup(credentials);
-      setError("");
-      setSuccessmsg("Voila, now log in");
+      toast.error("");
+      toast.success("Voila, now log in");
       setName("");
       setUsername("");
       setPassword("");
       setDisabled(true);
     } catch (err) {
       setDisabled(false);
-      setSuccessmsg("");
       if (err.status === 500)
-        setError("Server not working~ Not your problem~!");
-      else if (err.status === 400) setError("Username already exists");
-      else setError("cannot signup right now!");
+        toast.error("Server not working~ Not your problem~!");
+      else if (err.status === 400) toast.error("Username already exists");
+      else toast.error("cannot signup right now!");
       console.log(err);
     } finally {
       setLoading(false); // Stop loader no matter what
@@ -84,9 +79,6 @@ function Signup() {
         onSubmit={handleSignup}
         className="flex flex-col items-center gap-4 w-full max-w-[320px]"
       >
-        {error && <ErrorMessage error={error} />}
-        {successmsg && <SuccessMsg msg={successmsg} />}
-
         <FormInput
           placeholder="Enter your name"
           value={name}

@@ -7,6 +7,7 @@ import "../css/Login.css";
 import loginService from "../services/login.js";
 import ErrorMessage from "./ErrorMessage.jsx";
 import FormInput from "./FormInput.jsx";
+import { toast } from "sonner";
 function Login() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -46,9 +47,7 @@ function Login() {
       const response = await loginService.login(credentials);
       console.log(response, "response");
       if (response.accessToken) {
-        loginService.setToken(response.accessToken);
         window.localStorage.setItem("loggedInUser", JSON.stringify(response));
-        setError("");
         setUser(response);
         navigate("/find", { replace: true });
         console.log(response.accessToken);
@@ -57,12 +56,12 @@ function Login() {
         setPassword("");
       } else {
         setUser(null);
-        setError("Invalid credentials please signup first");
+        toast.error("Invalid credentials please signup first");
       }
     } catch (err) {
       if (err.status === 500)
-        setError("Server not working~ Not your problem~!");
-      else setError("Invalid username or password please signup first");
+        toast.error("Server not working~ Not your problem~!");
+      else toast.error("Invalid username or password please signup first");
       console.log(err);
     } finally {
       setLoading(false); // Stop loader no matter what

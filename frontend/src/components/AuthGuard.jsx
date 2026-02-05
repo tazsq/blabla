@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
-import login from "../services/login";
-import Loading from "../pages/Loading";
 import { toast } from "sonner";
+import { AuthContext } from "../contexts/AuthContext";
+import Loading from "../pages/Loading";
+import axiosInstance from "../services/api";
+import login from "../services/login";
 
 function AuthGuard({ children }) {
   const [mounted, setMounted] = useState(false);
@@ -11,28 +12,15 @@ function AuthGuard({ children }) {
 
   useEffect(() => setMounted(true), []);
   useEffect(() => {
-    if (user) {
-      console.log(user);
-      //verify through backend endpoint if token expired or not
+    console.log(user);
+    //verify through backend endpoint if token expired or not
 
-      try {
-        const payload = JSON.parse(atob(user.accessToken.split(".")[1]));
-        console.log(payload, "-----payload");
-        const now = Date.now();
-        console.log(payload.exp, "---------payload.exp");
-        if (payload.exp * 1000 < now) {
-          // Token expired
-          handleLogout(); // Clear localStorage and redirect
-        } else {
-          // Token valid → maybe setUser(), etc.
-          console.log("Token still valid");
-        }
-      } catch (err) {
-        console.log(err);
-        handleLogout(); // Malformed token
-      }
-      login.setToken(user.accessToken);
-    }
+    axiosInstance
+      .post("/api/auth/verify", {})
+      .then((res) => {
+        console.log(res, "from authguard reload");
+      })
+      .catch(() => handleLogout());
   }, []);
   const navigate = useNavigate();
   if (!mounted) return <Loading />;

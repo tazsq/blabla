@@ -14,6 +14,7 @@ import "../css/FindaRide.css";
 import ErrorMessage from "./ErrorMessage";
 import FormInput from "./FormInput";
 import { addDays } from "date-fns/addDays";
+import axiosInstance from "../services/api";
 function FindaRide() {
   const navigate = useNavigate();
   const [rides, setRides] = useState([]);
@@ -71,9 +72,9 @@ function FindaRide() {
       searchParams.append("passengersRequired", formData.passengersRequired);
       // searchParams.append("filter", filter[0]);
       console.log(user.accessToken, user, "user token--");
-      const resp = await axios.get(`/api/routes/?${searchParams.toString()}`, {
-        headers: { Authorization: `Bearer ${user.accessToken}` },
-      });
+      const resp = await axiosInstance.get(
+        `/api/routes/?${searchParams.toString()}`,
+      );
       console.log(resp.status);
       if (resp.status === 401) {
         toast.error("Login expired!");

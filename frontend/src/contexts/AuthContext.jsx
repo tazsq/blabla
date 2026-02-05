@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import axiosInstance from "../services/api";
 
 const AuthContext = createContext(null);
 
@@ -11,6 +12,12 @@ function AuthProvider({ children }) {
   }, []);
   const handleLogout = () => {
     window.localStorage.removeItem("loggedInUser");
+    axiosInstance
+      .post("/api/auth/logout", {})
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
     setUser(null);
   };
   return (
